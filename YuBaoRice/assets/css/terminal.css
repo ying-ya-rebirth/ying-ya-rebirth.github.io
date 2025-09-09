@@ -4,6 +4,17 @@
   --accent: #6f49ab;
 }
 
-body {
-  font-family: "Cascadia Code", Consolas, "Courier New", monospace;
+body, .post-content, h1, h2, h3, h4, h5, h6 {
+  font-family: "Noto Sans SC", "Silkscreen", "Cascadia Code", "Consolas", monospace;
+}
+
+@font-face {
+  font-family: 'Sarasa Gothic SC';
+  src: url("ying-ya-rebirth.github.io\YuBaoRice\static\fonts\Sarasa-SuperTTC.ttc") format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+body, .post-content, h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sarasa Gothic SC', sans-serif !important;
 }
