@@ -1,0 +1,6 @@
+[submodule "themes/terminal"]
+	path = themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git
+[submodule "YuBaoRice/themes/terminal"]
+	path = YuBaoRice/themes/terminal
+	url = https://github.com/panr/hugo-theme-terminal.git

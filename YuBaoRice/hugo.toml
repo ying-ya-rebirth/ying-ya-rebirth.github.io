@@ -1,0 +1,23 @@
+baseURL = 'https://example.org/'
+defaultContentLanguage = 'zh'
+title = '宇宝饭'
+theme = "terminal"
+
+[languages]
+  [languages.zh]
+    contentDir = 'content/zh'
+    languageName = 'Chinese'
+    title = '宇宝饭'
+    weight = 1
+
+    [languages.fr]
+    contentDir = 'content/fr'
+    languageName = 'French'
+    title = "Le délice d'Yubao"
+    weight = 2
+
+    [languages.en]
+    contentDir = 'content/en'
+    languageName = 'English'
+    title = 'YuBaoRice'
+    weight = 3
