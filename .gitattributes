@@ -1,0 +1,1 @@
+static/fonts/*.ttc filter=lfs diff=lfs merge=lfs -text
