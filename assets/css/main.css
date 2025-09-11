@@ -275,11 +275,7 @@ ol li {
 code,
 kbd {
   font-family:
-    "Fira Code",
-    Monaco,
-    Consolas,
-    "Ubuntu Mono",
-    monospace !important;
+  'Sarasa Gothic SC';
   font-feature-settings: normal;
   background: color-mix(in srgb, var(--foreground) 5%, transparent);
   border: 1px solid var(--code-border);

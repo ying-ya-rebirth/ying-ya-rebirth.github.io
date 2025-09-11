@@ -21,3 +21,8 @@ theme = "terminal"
     languageName = 'English'
     title = 'YuBaoRice'
     weight = 3
+
+[params]
+  [params.logo]
+    logoText = "宇宝饭·YuBaoRice"
+    logoHomeLink = "/"
