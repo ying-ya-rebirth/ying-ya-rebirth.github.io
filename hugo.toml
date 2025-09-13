@@ -1,7 +1,7 @@
 baseURL = 'https://example.org/'
 defaultContentLanguage = 'zh'
 title = '宇宝饭'
-theme = "terminal"
+theme = "github-style"
 
 [languages]
   [languages.zh]
@@ -23,3 +23,37 @@ theme = "terminal"
     weight = 3
 
 staticDir = "static"
+
+lastmod = true
+
+  [frontmatter]
+    lastmod = ["lastmod", ":fileModTime", ":default"]
+
+  [params]
+  author = "蚜英"
+  description = "XXXX"
+  github = "ying-ya-rebirth"
+  email = "yingya218@gmail.com"
+  keywords = "blog, google analytics"
+  rss = true
+  userStatusEmoji = "🐱"
+  favicon = "/images/github.png"
+  avatar = "/images/avataryaying.jpg"
+  headerIcon = "/images/GitHub-Mark-Light-32px.png"
+  location = "Asia"
+  enableGitalk = true
+  custom_css = ["css/custom.css"]
+  custom_js = ["js/custom.js"]
+
+  [params.gitalk]
+    clientID = "Your client ID"
+    clientSecret = "Your client secret"
+    repo = "repo"
+    owner = "Your Github username"
+    admin = "Your Github username"
+    id = "location.pathname"
+    labels = "gitalk"
+    perPage = 30
+    pagerDirection = "last"
+    createIssueManually = true
+    distractionFreeMode = false
