@@ -24,12 +24,7 @@ theme = "github-style"
 
 staticDir = "static"
 
-lastmod = true
-
-  [frontmatter]
-    lastmod = ["lastmod", ":fileModTime", ":default"]
-
-  [params]
+[params]
   author = "蚜英"
   description = "XXXX"
   github = "ying-ya-rebirth"
@@ -38,12 +33,13 @@ lastmod = true
   rss = true
   userStatusEmoji = "🐱"
   favicon = "/images/github.png"
-  avatar = "/images/avataryaying.jpg"
-  headerIcon = "/images/GitHub-Mark-Light-32px.png"
+  avatar = "/images/avatar.png"
+  headerIcon = "/images/GitHub-Mark-white.png"
   location = "Asia"
   enableGitalk = true
   custom_css = ["css/custom.css"]
   custom_js = ["js/custom.js"]
+  enableSearch = true 
 
   [params.gitalk]
     clientID = "Your client ID"
@@ -57,3 +53,6 @@ lastmod = true
     pagerDirection = "last"
     createIssueManually = true
     distractionFreeMode = false
+
+  [outputs]
+  home = ["HTML", "RSS", "JSON"]
