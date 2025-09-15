@@ -26,7 +26,7 @@ staticDir = "static"
 
 [params]
   author = "蚜英"
-  description = "XXXX"
+  description = "记述或许是我们唯一拥有的尊严。"
   github = "ying-ya-rebirth"
   email = "yingya218@gmail.com"
   keywords = "blog, google analytics"
