@@ -55,13 +55,15 @@
       computedId = location.pathname.substring(0, 49);
     }
 
+    const labelsArr = Array.isArray(cfg.labels) ? cfg.labels : (cfg.labels ? [cfg.labels] : ["gitalk"]);
+
     const gitalk = new Gitalk({
       clientID: cfg.clientID,
       clientSecret: cfg.clientSecret,
       repo: cfg.repo,
       owner: cfg.owner,
       admin: Array.isArray(cfg.admin) && cfg.admin.length ? cfg.admin : [cfg.owner],
-      labels: cfg.labels || 'gitalk',
+      labels: labelsArr,
       perPage: cfg.perPage || 30,
       pagerDirection: cfg.pagerDirection || 'last',
       createIssueManually: !!cfg.createIssueManually,
