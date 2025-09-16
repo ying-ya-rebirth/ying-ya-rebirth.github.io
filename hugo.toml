@@ -26,25 +26,35 @@ staticDir = "static"
 
 [params]
   author = "蚜英"
-  description = "记述或许是我们唯一拥有的尊严。"
+  description = "记述是最后的尊严。"
   github = "ying-ya-rebirth"
   email = "yingya218@gmail.com"
   keywords = "blog, google analytics"
   rss = true
   userStatusEmoji = "🐱"
-  favicon = "/images/github.png"
+  favicon = "/images/github-mark.png"
   avatar = "/images/avatar.png"
-  headerIcon = "/images/GitHub-Mark-white.png"
+  headerIcon = "/images/github-mark-white.png"
   location = "Asia"
   enableGitalk = true
-  custom_css = ["css/custom.css"]
-  custom_js = ["js/custom.js"]
+  custom_css = []
+  custom_js = []
   enableSearch = true 
+
+  # Gallery configuration for user profile
+  # GitHub repo that stores gallery images and optional index.json
+  galleryRepoOwner = ""
+  galleryRepoName = ""
+  galleryRepoBranch = "main"
+  galleryPath = "gallery"
+  galleryIndexFile = "index.json"
+  # If true, show Gallery section on profile page
+  galleryEnabled = true
 
   [params.gitalk]
     clientID = "Iv23li4LgrNqnApLqosL"
     clientSecret = "e24c9716775423afff291a13af52ad3fdb311783"
-    repo = "repo"
+    repo = "ying-ya-rebirth.github.io"
     owner = "ying-ya-rebirth"
     admin = "ying-ya-rebirth"
     id = "location.pathname"

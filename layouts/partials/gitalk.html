@@ -1,18 +1,73 @@
 {{ if .Site.Params.enableGitalk }}
 <div id="gitalk-container" class="gitalk-container"></div>
-<link rel="stylesheet" href='{{ "css/gitalk.css" | absURL }}'>
-<script src='{{ "js/gitalk.min.js" | absURL }}'></script>
+<link rel="stylesheet" href='{{ "css/gitalk.css" | relURL }}'>
+<script src='{{ "js/gitalk.min.js" | relURL }}'></script>
 <script>
-  const gitalk = new Gitalk({
-    clientID: '{{ .Site.Params.Gitalk.clientID }}',
-    clientSecret: '{{ .Site.Params.Gitalk.clientSecret }}',
-    repo: '{{ .Site.Params.Gitalk.repo }}',
-    owner: '{{ .Site.Params.Gitalk.owner }}',
-    admin: ['{{ .Site.Params.Gitalk.owner }}'],
-    id: eval({{ .Site.Params.Gitalk.id }}), // Ensure uniqueness and length less than 50
-    distractionFreeMode: false // Facebook-like distraction free mode
-  });
   (function() {
+    let cfgRaw;
+    try {
+      cfgRaw = JSON.parse('{{ .Site.Params.gitalk | jsonify | safeJS }}');
+    } catch (e) {
+      console.error('Gitalk 配置解析失败(JSON.parse)：', e);
+      return;
+    }
+
+    // 规范化配置与宽松兼容（clientID/clientId）
+    const cfg = {
+      clientID: (cfgRaw && (cfgRaw.clientID || cfgRaw.clientId || cfgRaw.clientid)) || '',
+      clientSecret: (cfgRaw && (cfgRaw.clientSecret || cfgRaw.clientsecret)) || '',
+      repo: (cfgRaw && (cfgRaw.repo)) || '',
+      owner: (cfgRaw && (cfgRaw.owner)) || '',
+      admin: cfgRaw && (cfgRaw.admin),
+      labels: cfgRaw && (cfgRaw.labels),
+      perPage: cfgRaw && (cfgRaw.perPage || cfgRaw.perpage),
+      pagerDirection: cfgRaw && (cfgRaw.pagerDirection || cfgRaw.pagerdirection),
+      createIssueManually: cfgRaw && (cfgRaw.createIssueManually || cfgRaw.createissuemanually),
+      distractionFreeMode: cfgRaw && (cfgRaw.distractionFreeMode || cfgRaw.distractionfreemode),
+      id: cfgRaw && (cfgRaw.id)
+    };
+
+    const missing = [];
+    if (!String(cfg.clientID).trim()) missing.push('clientID');
+    if (!String(cfg.repo).trim()) missing.push('repo');
+    if (!String(cfg.owner).trim()) missing.push('owner');
+    console.debug('Gitalk cfg =', cfg, 'missing =', missing);
+    if (missing.length) {
+      console.error('Gitalk 配置不完整，请在 hugo.toml 的 [params.gitalk] 中设置：' + missing.join('/'));
+      return;
+    }
+    const idExpr = (cfg.id || 'location.pathname');
+    let computedId;
+    try {
+      // 仅允许两种常见表达式，避免任意 eval 风险
+      if (idExpr === 'location.pathname') {
+        computedId = location.pathname;
+      } else if (idExpr === 'location.href') {
+        computedId = location.href;
+      } else {
+        computedId = String(idExpr);
+      }
+      // Gitalk 限制 id 长度 < 50
+      if (computedId.length > 49) {
+        computedId = computedId.substring(0, 49);
+      }
+    } catch (e) {
+      computedId = location.pathname.substring(0, 49);
+    }
+
+    const gitalk = new Gitalk({
+      clientID: cfg.clientID,
+      clientSecret: cfg.clientSecret,
+      repo: cfg.repo,
+      owner: cfg.owner,
+      admin: Array.isArray(cfg.admin) && cfg.admin.length ? cfg.admin : [cfg.owner],
+      labels: cfg.labels || 'gitalk',
+      perPage: cfg.perPage || 30,
+      pagerDirection: cfg.pagerDirection || 'last',
+      createIssueManually: !!cfg.createIssueManually,
+      distractionFreeMode: !!cfg.distractionFreeMode,
+      id: computedId
+    });
     gitalk.render('gitalk-container');
   })();
 </script>

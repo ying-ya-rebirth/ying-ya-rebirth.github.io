@@ -1,0 +1,23 @@
+.gallery-section{margin-top:16px}
+.gallery-masonry{column-count:1;column-gap:16px}
+@media(min-width:544px){.gallery-masonry{column-count:2}}
+@media(min-width:768px){.gallery-masonry{column-count:3}}
+@media(min-width:1012px){.gallery-masonry{column-count:4}}
+.polaroid{break-inside:avoid;display:inline-block;background:#fff;padding:8px 8px 16px 8px;margin:0 0 16px 0;box-shadow:0 2px 6px rgba(0,0,0,.15);border-radius:4px;transform:rotate(var(--tilt,0deg));transition:transform .2s ease}
+.polaroid:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px)}
+.polaroid-img{width:100%;height:auto;display:block;border-radius:2px}
+.polaroid-caption{margin-top:8px}
+.polaroid-title{font-weight:600;margin-bottom:4px}
+.polaroid-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--color-fg-muted,#6e7781)}
+.polaroid-tags{display:flex;flex-wrap:wrap;gap:6px}
+.polaroid-tag{background:#f2f4f6;border:1px solid #e1e4e8;border-radius:999px;padding:2px 8px;font-size:12px;color:#57606a}
+@media(prefers-color-scheme:dark){.polaroid{background:#0d1117;box-shadow:0 2px 6px rgba(0,0,0,.5)}.polaroid-tag{background:#161b22;border-color:#30363d;color:#8b949e}}
+.gallery-modal{position:fixed;inset:0;z-index:1050}
+.gallery-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6)}
+.gallery-modal-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:min(90vw,1100px);max-height:90vh;background:var(--bg,#fff);border-radius:6px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+@media(prefers-color-scheme:dark){.gallery-modal-content{--bg:#0d1117}}
+.gallery-modal-close{position:absolute;right:8px;top:4px;background:transparent;border:none;font-size:28px;line-height:1;color:#fff;cursor:pointer;z-index:1}
+.gallery-modal-img{display:block;max-width:100%;max-height:80vh;width:auto;height:auto;margin:0 auto}
+.gallery-modal-info{padding:8px 12px;color:var(--color-fg-default,#24292f)}
+.gallery-modal-tags{margin-top:4px;display:flex;flex-wrap:wrap;gap:6px}
+
