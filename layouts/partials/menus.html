@@ -29,6 +29,14 @@
               Posts
               <span class="Counter">{{ $section_count}}</span>
             </a>
+            {{ if .Site.Params.galleryEnabled }}
+            <a class="UnderlineNav-item {{ if eq .RelPermalink "/gallery/" }} selected {{ end }}" href="{{urls.JoinPath .Site.BaseURL "gallery"}}">
+              <svg class="octicon octicon-image UnderlineNav-octicon hide-sm" height="16" viewBox="0 0 16 16" version="1.1" width="16">
+                <path fill-rule="evenodd" d="M1.75 2.5h12.5c.138 0 .25.112.25.25v10.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25V2.75c0-.138.112-.25.25-.25zm-1.5 0A1.75 1.75 0 000 4.25v9.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0016 13.75v-9.5A1.75 1.75 0 0014.25 2.5H1.75zM10.5 6a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM2.75 12.5l3.5-4.5 2.5 3 1.5-2 3.5 3.5H2.75z"></path>
+              </svg>
+              Gallery
+            </a>
+            {{ end }}
           </nav>
           <div class="profile-color-modes js-promo-color-modes-banner-profile isInitialToggle">
             <svg width="106" height="60" viewBox="0 0 106 60" fill="none" stroke-width="3" stroke-linecap="round"

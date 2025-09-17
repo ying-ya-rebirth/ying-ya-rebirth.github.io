@@ -1,0 +1,53 @@
+{{ if .Site.Params.galleryEnabled }}
+<div id="gallery-anchor"></div>
+<div class="container-xl px-3 px-md-4 px-lg-5">
+  <div class="gutter-condensed gutter-lg flex-column flex-md-row d-flex">
+    <div class="flex-shrink-0 col-12 col-md-3 mb-4 mb-md-0"></div>
+    <div class="flex-shrink-0 col-12 col-md-9 mb-4 mb-md-0">
+      <div id="gallery-section"
+           class="gallery-section border-top color-border-secondary pt-3 mt-3 clearfix"
+           data-owner="{{ .Site.Params.galleryRepoOwner }}"
+           data-repo="{{ .Site.Params.galleryRepoName }}"
+           data-branch="{{ .Site.Params.galleryRepoBranch }}"
+           data-path="{{ .Site.Params.galleryPath }}"
+           data-index="{{ .Site.Params.galleryIndexFile }}">
+        <h2 class="mb-2 h4">Gallery</h2>
+        <div id="gallery" class="gallery-masonry"></div>
+        <div id="gallery-empty" class="color-fg-muted" style="display:none;">暂无图片</div>
+        <div id="gallery-error" class="color-fg-danger" style="display:none;">加载图库失败</div>
+      </div>
+
+      <template id="gallery-card-template">
+        <figure class="polaroid">
+          <a class="polaroid-link" href="#" target="_blank" rel="noopener noreferrer">
+            <img class="polaroid-img" alt="" loading="lazy" />
+          </a>
+          <figcaption class="polaroid-caption">
+            <div class="polaroid-title"></div>
+            <div class="polaroid-meta">
+              <span class="polaroid-date"></span>
+              <div class="polaroid-tags"></div>
+            </div>
+          </figcaption>
+        </figure>
+      </template>
+
+      <div id="gallery-modal" class="gallery-modal" style="display:none;">
+        <div class="gallery-modal-backdrop"></div>
+        <div class="gallery-modal-content">
+          <button class="gallery-modal-close" aria-label="Close">×</button>
+          <img class="gallery-modal-img" alt="" />
+          <div class="gallery-modal-info">
+            <div class="gallery-modal-title"></div>
+            <div class="gallery-modal-tags"></div>
+          </div>
+        </div>
+      </div>
+
+      <link rel="stylesheet" href="{{ "css/gallery.css" | absURL }}">
+      <script src="{{ "js/gallery.js" | absURL }}" defer></script>
+    </div>
+  </div>
+</div>
+{{ end }}
+

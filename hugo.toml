@@ -61,7 +61,7 @@ staticDir = "static"
     labels = ["gitalk"]
     perPage = 30
     pagerDirection = "last"
-    createIssueManually = true
+    createIssueManually = false
     distractionFreeMode = false
 
   [outputs]
