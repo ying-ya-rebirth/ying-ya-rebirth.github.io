@@ -3,4 +3,3 @@ node_modules/
 public/
 resources/
 _gitalk.txt
-secrets.toml
