@@ -51,6 +51,10 @@
       </a>
     </div>
     <div class="Header-item" style="margin-right: 0;">
+      <!-- Accessibility toggle placed before theme toggle so they don't overlap -->
+      <a href="javascript:void(0)" id="accessibility-toggle" class="Header-link no-select accessibility-toggle" title="无障碍设置">
+        <i class="fa-solid fa-universal-access" aria-hidden="true" style="font-size:16px;color:var(--color-header-text)"></i>
+      </a>
       <a href="javascript:void(0)" class="Header-link no-select" onclick="switchTheme()">
         <svg style="fill: var(--color-profile-color-modes-toggle-moon);" class="no-select" viewBox="0 0 16 16"
           version="1.1" width="16" height="16">

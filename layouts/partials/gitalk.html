@@ -24,6 +24,7 @@
       pagerDirection: cfgRaw && (cfgRaw.pagerDirection || cfgRaw.pagerdirection),
       createIssueManually: cfgRaw && (cfgRaw.createIssueManually || cfgRaw.createissuemanually),
       distractionFreeMode: cfgRaw && (cfgRaw.distractionFreeMode || cfgRaw.distractionfreemode),
+      proxy: cfgRaw && (cfgRaw.proxy),
       id: cfgRaw && (cfgRaw.id)
     };
 
@@ -68,6 +69,7 @@
       pagerDirection: cfg.pagerDirection || 'last',
       createIssueManually: !!cfg.createIssueManually,
       distractionFreeMode: !!cfg.distractionFreeMode,
+      proxy: cfg.proxy,
       id: computedId
     });
     gitalk.render('gitalk-container');

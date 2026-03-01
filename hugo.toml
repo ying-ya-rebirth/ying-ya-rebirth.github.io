@@ -63,6 +63,7 @@ staticDir = "static"
     pagerDirection = "last"
     createIssueManually = false
     distractionFreeMode = false
+    proxy = "https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"
 
   [outputs]
   home = ["HTML", "RSS", "JSON"]

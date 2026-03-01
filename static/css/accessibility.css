@@ -1,0 +1,265 @@
+/* 无障碍功能面板样式 */
+.accessibility-menu {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  background: white;
+  border: 1px solid #d0d7de;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  max-height: 80vh;
+  overflow-y: auto;
+  z-index: 9999;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.accessibility-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid #d0d7de;
+  background: #f6f8fa;
+  border-radius: 8px 8px 0 0;
+}
+
+.accessibility-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #24292f;
+}
+
+.close-btn {
+  background: var(--color-header-bg);
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #57606a;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn:hover {
+  color: #24292f;
+}
+
+.accessibility-options {
+  padding: 16px;
+}
+
+.option-group {
+  margin-bottom: 24px;
+}
+
+.option-group:last-child {
+  margin-bottom: 0;
+}
+
+.option-group h4 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #24292f;
+}
+
+.option-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #f6f8fa;
+}
+
+.option-item:last-child {
+  border-bottom: none;
+}
+
+
+/* Use visible native checkbox for better accessibility */
+.option-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #0366d6; /* modern browsers */
+  flex-shrink: 0;
+}
+
+/* Fallback custom checkbox visuals (if needed) */
+.checkmark {
+  display: none;
+}
+
+.option-content {
+  flex: 1;
+}
+
+.option-content strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #24292f;
+  margin-bottom: 2px;
+}
+
+.option-content small {
+  font-size: 12px;
+  color: #57606a;
+  line-height: 1.4;
+}
+
+/* 滑块样式 */
+.option-item input[type="range"] {
+  width: 100%;
+  margin: 8px 0;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 3px;
+  background: #d0d7de;
+  outline: none;
+}
+
+.option-item input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0366d6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.option-item input[type="range"]::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #0366d6;
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 恢复默认按钮 */
+.reset-btn {
+  width: 100%;
+  padding: 12px;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 6px;
+  color: #24292f;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+  background: #eaeef2;
+  border-color: #d0d7de;
+}
+
+.reset-btn:active {
+  background: #d0d7de;
+}
+
+/* 阅读进度条 */
+.reading-progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 999;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #0366d6;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+/* 棕色滤镜 */
+.brown-filter-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 998;
+  background: rgba(139, 69, 19, 0);
+  transition: background 0.3s ease;
+  mix-blend-mode: multiply;
+}
+
+/* Make sure accessibility menu and toggle sit above header controls but don't block theme toggle */
+.accessibility-toggle {
+  margin-right: 8px;
+  color: #f8f8f8; /* make the icon white for stronger contrast */
+}
+
+#accessibility-menu {
+  z-index: 9999;
+}
+
+/* slider label placed above slider to avoid cramped look */
+.slider-label {
+  font-size: 13px;
+  color: #24292f;
+  margin-bottom: 6px;
+}
+
+/* Apply font variables more broadly so Posts inherit settings */
+:root {
+  --custom-font-size: 16px;
+  --custom-line-height: 1.6;
+  --custom-letter-spacing: 0px;
+}
+
+/* ensure main content uses the variables */
+.markdown-body, .post, article, .post-content {
+  font-size: var(--custom-font-size) !important;
+  line-height: var(--custom-line-height) !important;
+  letter-spacing: var(--custom-letter-spacing) !important;
+}
+
+/* 全局字体设置 */
+body {
+  --custom-font-size: 16px;
+  --custom-line-height: 1.6;
+  --custom-letter-spacing: 0px;
+}
+
+.markdown-body {
+  font-size: var(--custom-font-size) !important;
+  line-height: var(--custom-line-height) !important;
+  letter-spacing: var(--custom-letter-spacing) !important;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .accessibility-panel {
+    top: 10px;
+    right: 10px;
+  }
+  
+  .accessibility-menu {
+    width: 280px;
+    right: -10px;
+  }
+  
+  .accessibility-toggle {
+    width: 45px;
+    height: 45px;
+  }
+}
