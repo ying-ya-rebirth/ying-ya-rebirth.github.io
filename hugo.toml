@@ -52,8 +52,8 @@ staticDir = "static"
   galleryEnabled = true
 
   [params.gitalk]
-    clientID = "Iv23li4LgrNqnApLqosL"
-    clientSecret = "e24c9716775423afff291a13af52ad3fdb311783"
+    clientID = "Ov23liFhu0DsjJtSv0Jx"
+    clientSecret = "${GITALK_CLIENT_SECRET}"
     repo = "ying-ya-rebirth.github.io"
     owner = "ying-ya-rebirth"
     admin = ["ying-ya-rebirth"]
