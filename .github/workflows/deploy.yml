@@ -19,9 +19,9 @@ jobs:
       - name: Build site
         env:
           # 这里把我们刚才设置的 secret 传给 Hugo
-          GITALK_CLIENT_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
+          HUGO_PARAMS_GITALK_CLIENTSECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
         run: |
           # 这一行会把 secret 在日志里变成 ***
-          echo "::add-mask::$GITALK_CLIENT_SECRET"
-          # 用 -D 参数直接覆盖配置
-          HUGO_ENV=production hugo -D params.gitalk.clientSecret="$GITALK_CLIENT_SECRET"
+          echo "::add-mask::$HUGO_PARAMS_GITALK_CLIENTSECRET"
+          # Hugo 会从 HUGO_PARAMS_* 环境变量读取参数
+          HUGO_ENV=production hugo
