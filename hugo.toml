@@ -53,7 +53,7 @@ staticDir = "static"
 
   [params.gitalk]
     clientID = "Ov23liFhu0DsjJtSv0Jx"
-    clientSecret = "${GITALK_CLIENT_SECRET}"
+    clientSecret = ""
     repo = "ying-ya-rebirth.github.io"
     owner = "ying-ya-rebirth"
     admin = ["ying-ya-rebirth"]
