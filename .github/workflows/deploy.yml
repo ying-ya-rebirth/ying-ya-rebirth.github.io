@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build site
+        env:
+          # 这里把我们刚才设置的 secret 传给 Hugo
+          GITALK_CLIENT_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
+        run: |
+          # 这一行会把 secret 在日志里变成 ***
+          echo "::add-mask::$GITALK_CLIENT_SECRET"
+          # 现在运行 Hugo，配置里的 ${GITALK_CLIENT_SECRET} 就会被替换
+          HUGO_ENV=production hugo
