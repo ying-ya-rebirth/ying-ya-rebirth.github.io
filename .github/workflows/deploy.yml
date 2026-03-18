@@ -1,0 +1,27 @@
+name: build
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: 'latest'
+
+      - name: Build site
+        env:
+          # 这里把我们刚才设置的 secret 传给 Hugo
+          HUGO_PARAMS_GITALK_CLIENTSECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
+        run: |
+          # 这一行会把 secret 在日志里变成 ***
+          echo "::add-mask::$HUGO_PARAMS_GITALK_CLIENTSECRET"
+          # Hugo 会从 HUGO_PARAMS_* 环境变量读取参数
+          HUGO_ENV=production hugo
