@@ -1,4 +1,4 @@
-{{/* Kit Email Subscribe Form — Kit UID: 2dc2926077 */}}
+{{/* Kit Email Subscribe Form — Form ID: 9220401 / UID: 2dc2926077 */}}
 <div class="kit-subscribe-wrap" id="kit-subscribe-wrap">
   <p class="kit-subscribe-label">有更新的话可以发到邮箱：</p>
   <form class="kit-subscribe-form" id="kit-subscribe-form" novalidate>
@@ -18,8 +18,8 @@
 
 <script>
 (function () {
-  var KIT_UID = "2dc2926077";
-  var KIT_API = "https://app.kit.com/forms/" + KIT_UID + "/subscriptions";
+  var KIT_FORM_ID = "9220401";
+  var KIT_API = "https://app.kit.com/forms/" + KIT_FORM_ID + "/subscriptions";
 
   var form  = document.getElementById("kit-subscribe-form");
   var input = document.getElementById("kit-subscribe-email");
@@ -46,16 +46,12 @@
 
     fetch(KIT_API, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email_address: email })
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "email_address=" + encodeURIComponent(email)
     })
-      .then(function (res) {
-        if (!res.ok) throw new Error("network");
-        return res.json();
-      })
       .then(function () {
         form.style.display = "none";
-        msg.textContent = "已收到！请前往邮箱确认一下。";
+        msg.textContent = "已收到！请前往邮箱确认一下。也注意看下垃圾箱哦";
         msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
       })
       .catch(function () {
