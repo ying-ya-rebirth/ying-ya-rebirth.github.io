@@ -1,0 +1,70 @@
+{{/* Kit Email Subscribe Form — Kit UID: 2dc2926077 */}}
+<div class="kit-subscribe-wrap" id="kit-subscribe-wrap">
+  <p class="kit-subscribe-label">有更新的话可以发到邮箱：</p>
+  <form class="kit-subscribe-form" id="kit-subscribe-form" novalidate>
+    <input
+      class="kit-subscribe-input"
+      id="kit-subscribe-email"
+      type="email"
+      name="email_address"
+      placeholder="your@email.com"
+      autocomplete="email"
+      required
+    />
+    <button class="kit-subscribe-btn" type="submit">发！</button>
+  </form>
+  <p class="kit-subscribe-msg" id="kit-subscribe-msg" aria-live="polite"></p>
+</div>
+
+<script>
+(function () {
+  var KIT_UID = "2dc2926077";
+  var KIT_API = "https://app.kit.com/forms/" + KIT_UID + "/subscriptions";
+
+  var form  = document.getElementById("kit-subscribe-form");
+  var input = document.getElementById("kit-subscribe-email");
+  var msg   = document.getElementById("kit-subscribe-msg");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var email = input.value.trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.classList.add("kit-subscribe-input--error");
+      setTimeout(function () {
+        input.classList.remove("kit-subscribe-input--error");
+      }, 1800);
+      return;
+    }
+
+    var btn = form.querySelector("button");
+    btn.disabled = true;
+    input.disabled = true;
+    btn.textContent = "…";
+
+    fetch(KIT_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email_address: email })
+    })
+      .then(function (res) {
+        if (!res.ok) throw new Error("network");
+        return res.json();
+      })
+      .then(function () {
+        form.style.display = "none";
+        msg.textContent = "已收到！请前往邮箱确认一下。";
+        msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
+      })
+      .catch(function () {
+        btn.disabled = false;
+        input.disabled = false;
+        btn.textContent = "发！";
+        msg.textContent = "提交失败，请稍后再试。如果持续出现问题，请邮件联系我！";
+        msg.className = "kit-subscribe-msg kit-subscribe-msg--err";
+      });
+  });
+})();
+</script>
