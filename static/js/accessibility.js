@@ -34,24 +34,35 @@ class AccessibilityController {
     const menu = document.getElementById('accessibility-menu');
     const closeBtn = document.getElementById('close-accessibility');
 
+    const closeMenu = () => {
+      if (!menu || menu.style.display === 'none') return;
+      menu.classList.add('hiding');
+      menu.addEventListener('animationend', () => {
+        menu.style.display = 'none';
+        menu.classList.remove('hiding');
+      }, { once: true });
+    };
+
     if (toggleBtn) {
       toggleBtn.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const isVisible = menu.style.display === 'block';
-        menu.style.display = isVisible ? 'none' : 'block';
+        if (menu.style.display === 'block') {
+          closeMenu();
+        } else {
+          menu.style.display = 'block';
+          menu.classList.remove('hiding');
+        }
       });
     }
 
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        menu.style.display = 'none';
-      });
+      closeBtn.addEventListener('click', () => closeMenu());
     }
 
     document.addEventListener('click', (e) => {
       if (!e.target.closest('#accessibility-menu') && !e.target.closest('#accessibility-toggle')) {
-        if (menu) menu.style.display = 'none';
+        closeMenu();
       }
     });
 
@@ -72,6 +83,7 @@ class AccessibilityController {
       fontSizeSlider.addEventListener('input', (e) => {
         this.settings.fontSize = parseInt(e.target.value);
         fontSizeValue.textContent = e.target.value + 'px';
+        this.updateSliderFill(e.target);
         this.applyFontSettings();
         this.saveSettings();
       });
@@ -84,6 +96,7 @@ class AccessibilityController {
       lineHeightSlider.addEventListener('input', (e) => {
         this.settings.lineHeight = parseFloat(e.target.value);
         lineHeightValue.textContent = e.target.value;
+        this.updateSliderFill(e.target);
         this.applyFontSettings();
         this.saveSettings();
       });
@@ -96,6 +109,7 @@ class AccessibilityController {
       letterSpacingSlider.addEventListener('input', (e) => {
         this.settings.letterSpacing = parseFloat(e.target.value);
         letterSpacingValue.textContent = e.target.value + 'px';
+        this.updateSliderFill(e.target);
         this.applyFontSettings();
         this.saveSettings();
       });
@@ -108,6 +122,7 @@ class AccessibilityController {
       brownFilterSlider.addEventListener('input', (e) => {
         this.settings.brownFilter = parseInt(e.target.value);
         brownFilterValue.textContent = e.target.value + '%';
+        this.updateSliderFill(e.target);
         this.applyBrownFilter();
         this.saveSettings();
       });
@@ -134,6 +149,20 @@ class AccessibilityController {
     this.applyFontSettings();
     this.applyBrownFilter();
     this.updateUI();
+    this.updateAllSliderFills();
+  }
+
+  updateSliderFill(slider) {
+    const min = parseFloat(slider.min) || 0;
+    const max = parseFloat(slider.max) || 100;
+    const val = parseFloat(slider.value) || 0;
+    const pct = ((val - min) / (max - min) * 100).toFixed(1) + '%';
+    slider.style.setProperty('--fill', pct);
+    slider.classList.add('filled');
+  }
+
+  updateAllSliderFills() {
+    document.querySelectorAll('.option-item input[type="range"]').forEach(s => this.updateSliderFill(s));
   }
 
   applyReadingProgress() {

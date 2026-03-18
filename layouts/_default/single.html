@@ -3,4 +3,7 @@
   {{ partial "post.html" .}}
   {{ partial "gitalk.html" . }}
 </div>
+
+<script type="application/javascript" src='{{ "js/reactions.js" | absURL }}'></script>
+<link rel="stylesheet" href='{{ "css/reactions.css" | absURL }}' />
 {{ end }}
