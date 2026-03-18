@@ -20,6 +20,7 @@
 (function () {
   var KIT_FORM_ID = "9220401";
   var KIT_API = "https://app.kit.com/forms/" + KIT_FORM_ID + "/subscriptions";
+  var STORAGE_KEY = "kit_submitted_emails";
 
   var form  = document.getElementById("kit-subscribe-form");
   var input = document.getElementById("kit-subscribe-email");
@@ -27,15 +28,33 @@
 
   if (!form) return;
 
+  function getSubmitted() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (e) { return []; }
+  }
+
+  function saveSubmitted(email) {
+    try {
+      var list = getSubmitted();
+      if (list.indexOf(email) === -1) { list.push(email); }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (e) {}
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
-    var email = input.value.trim();
+    var email = input.value.trim().toLowerCase();
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       input.classList.add("kit-subscribe-input--error");
-      setTimeout(function () {
-        input.classList.remove("kit-subscribe-input--error");
-      }, 1800);
+      setTimeout(function () { input.classList.remove("kit-subscribe-input--error"); }, 1800);
+      return;
+    }
+
+    // 已提交过，直接显示猫猫
+    if (getSubmitted().indexOf(email) !== -1) {
+      form.style.display = "none";
+      msg.textContent = "邮递猫宇宝已在路上 ─=≡o(=•ェ•=)m✉📫";
+      msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
       return;
     }
 
@@ -50,15 +69,16 @@
       body: "email_address=" + encodeURIComponent(email)
     })
       .then(function () {
+        saveSubmitted(email);
         form.style.display = "none";
-        msg.textContent = "已收到！请前往邮箱确认一下。也注意看下垃圾箱哦";
+        msg.textContent = "已收到！请前往邮箱确认一下。";
         msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
       })
       .catch(function () {
         btn.disabled = false;
         input.disabled = false;
         btn.textContent = "发！";
-        msg.textContent = "提交失败，请稍后再试。如果持续出现问题，请邮件联系我！";
+        msg.textContent = "🫤出了点小问题，再试一次吧。还是不行就联系我邮箱！";
         msg.className = "kit-subscribe-msg kit-subscribe-msg--err";
       });
   });
