@@ -27,18 +27,33 @@ summary = "世界是残酷又慷慨的。"
 
 让我们试着用图来理解它：
 
-```
-收益
-  ↑
-  |            ╱
-  |          ╱
-  |        ╱
-  |      ╱
-  |────────────────→ 事件发生的概率
-  |    ╱
-  |  ╱
-  |╱
-```
+<svg viewBox="0 0 420 300" xmlns="http://www.w3.org/2000/svg" style="max-width:480px;width:100%;font-family:'Cascadia Code',Consolas,monospace;">
+  <rect width="420" height="300" fill="var(--color-bg-secondary)" rx="10"/>
+
+  <defs>
+    <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L8,3 z" fill="var(--color-text-primary)"/>
+    </marker>
+  </defs>
+
+  <line x1="80" y1="240" x2="380" y2="240" stroke="var(--color-text-primary)" stroke-width="1.5" marker-end="url(#arr2)"/>
+  <line x1="80" y1="240" x2="80" y2="40" stroke="var(--color-text-primary)" stroke-width="1.5" marker-end="url(#arr2)"/>
+
+  <line x1="80" y1="160" x2="370" y2="160" stroke="var(--color-text-tertiary)" stroke-width="1" stroke-dasharray="4,4"/>
+
+  <polyline points="88,195 200,195 330,65" fill="none" stroke="var(--color-text-primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="375" y="255" font-size="12" fill="var(--color-text-secondary)" text-anchor="middle"></text>
+  <text x="48" y="44" font-size="12" fill="var(--color-text-secondary)" text-anchor="middle">
+
+  <text x="66" y="164" font-size="11" fill="var(--color-text-tertiary)" text-anchor="end"></text>
+
+  <text x="138" y="188" font-size="11" fill="var(--color-text-secondary)" text-anchor="middle">
+
+  <text x="295" y="100" font-size="11" fill="var(--color-text-secondary)" text-anchor="middle">
+</svg>
+
+↑ 收益 　　　　　　　　　　　　事件发生的概率 →
 
 横轴是「事件是否发生」（比如橄榄是否丰收），纵轴是你的收益。你可以看到：
 
@@ -73,8 +88,6 @@ summary = "世界是残酷又慷慨的。"
 
 避免负向黑天鹅，是为了保护下行。拥抱正向黑天鹅，是为了创造上行。两者结合起来，才是完整的非对称性思维。
 
-这个发现让我很兴奋。
-
 ## 生活中的期权
 
 好了，现在可以讲讲我在文首提到的「经历」。最近看到某地应急管理局有面向社会的低压电工证培训计划，我心痒痒想要参加。我的理由很简单，它的成本不高（800 元培训费+250 元报考费+12 天的精力），但有可能让我能够进入某些领域，或是获得蓝领技能，后者在我的生活中太难得了。更好玩的是，除了上述两种可能性，我完全想象不出来学会低压电基础知识的我会有怎样的人生。这几乎是彻底的未知，却只要最多造成小小的损耗。
@@ -100,8 +113,6 @@ Gemini 告诉我这就是一种期权。（猫猫震惊.jpg）
 - 谁知道一场跨界的会议会不会让你看到完全不同的思路？
 
 **我无法提前知道收益会是什么**。这不是投入 A 就能得到 B 的线性关系，而是一种开放式的可能性。
-
-这个发现让我很兴奋。因为它给了我一个理性框架，去支持我一直以来凭直觉在做的事。我不是在瞎折腾，我是在创造非对称机会。
 
 ## 但不是所有便宜的尝试都值得做
 
@@ -150,6 +161,6 @@ TA 们只做确定性高的事：上班、回家、看剧、睡觉。不是说�
 
 这就是我现在的状态：保持主业稳定，然后在边缘地带撒一些种子。有些会枯萎，有些会长成意想不到的东西。
 
-当然，如果最终真的获得了什么，呃……自有大儒前来辩经。会有人帮我总结成「connect the dots」的励志故事。那是后视镜里的宿命论，命运的推背感。
+当然，如果最终真的获得了什么，呃……自有大儒替我辩经。会有人帮我总结成「connect the dots」的励志故事。那是后视镜里的宿命论，命运的推背感。
 
 真正重要的，是我在过程里保持了足够的开放性。我给未来留了很多扇门，至于它们最后会通向哪里——**谁知道呢？**
