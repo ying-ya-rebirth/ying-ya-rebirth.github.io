@@ -18,10 +18,11 @@ jobs:
 
       - name: Build site
         env:
-          # 这里把我们刚才设置的 secret 传给 Hugo
-          HUGO_PARAMS_GITALK_CLIENTSECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
+          GITALK_SECRET: ${{ secrets.GITALK_CLIENT_SECRET }}
         run: |
           # 这一行会把 secret 在日志里变成 ***
-          echo "::add-mask::$HUGO_PARAMS_GITALK_CLIENTSECRET"
-          # Hugo 会从 HUGO_PARAMS_* 环境变量读取参数
+          echo "::add-mask::$GITALK_SECRET"
+          # 用 sed 直接替换 hugo.toml 中的 clientSecret
+          sed -i "s|clientSecret = \"\"|clientSecret = \"$GITALK_SECRET\"|" hugo.toml
+          # 现在构建
           HUGO_ENV=production hugo

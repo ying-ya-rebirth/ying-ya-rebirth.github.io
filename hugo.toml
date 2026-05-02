@@ -40,11 +40,12 @@ staticDir = "static"
   custom_css = []
   custom_js = []
   enableSearch = true 
+  galleryEnabled = true
 
   # Gallery configuration for user profile
   # GitHub repo that stores gallery images and optional index.json
-  galleryRepoOwner = ""
-  galleryRepoName = ""
+  galleryRepoOwner = "ying-ya-rebirth"  # GitHub 用户/组织
+  galleryRepoName = "ying-ya-gallery"  # 仓库名称
   galleryRepoBranch = "main"
   galleryPath = "gallery"
   galleryIndexFile = "index.json"
