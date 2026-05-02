@@ -1,0 +1,86 @@
+{{/* Kit Email Subscribe Form — Form ID: 9220401 / UID: 2dc2926077 */}}
+<div class="kit-subscribe-wrap" id="kit-subscribe-wrap">
+  <p class="kit-subscribe-label">有更新的话可以发到邮箱：</p>
+  <form class="kit-subscribe-form" id="kit-subscribe-form" novalidate>
+    <input
+      class="kit-subscribe-input"
+      id="kit-subscribe-email"
+      type="email"
+      name="email_address"
+      placeholder="your@email.com"
+      autocomplete="email"
+      required
+    />
+    <button class="kit-subscribe-btn" type="submit">发！</button>
+  </form>
+  <p class="kit-subscribe-msg" id="kit-subscribe-msg" aria-live="polite"></p>
+</div>
+
+<script>
+(function () {
+  var KIT_FORM_ID = "9220401";
+  var KIT_API = "https://app.kit.com/forms/" + KIT_FORM_ID + "/subscriptions";
+  var STORAGE_KEY = "kit_submitted_emails";
+
+  var form  = document.getElementById("kit-subscribe-form");
+  var input = document.getElementById("kit-subscribe-email");
+  var msg   = document.getElementById("kit-subscribe-msg");
+
+  if (!form) return;
+
+  function getSubmitted() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); } catch (e) { return []; }
+  }
+
+  function saveSubmitted(email) {
+    try {
+      var list = getSubmitted();
+      if (list.indexOf(email) === -1) { list.push(email); }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    } catch (e) {}
+  }
+
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    var email = input.value.trim().toLowerCase();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      input.classList.add("kit-subscribe-input--error");
+      setTimeout(function () { input.classList.remove("kit-subscribe-input--error"); }, 1800);
+      return;
+    }
+
+    // 已提交过，直接显示猫猫
+    if (getSubmitted().indexOf(email) !== -1) {
+      form.style.display = "none";
+      msg.textContent = "邮递猫宇宝已在路上 ─=≡o(=•ェ•=)m✉📫";
+      msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
+      return;
+    }
+
+    var btn = form.querySelector("button");
+    btn.disabled = true;
+    input.disabled = true;
+    btn.textContent = "…";
+
+    fetch(KIT_API, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: "email_address=" + encodeURIComponent(email)
+    })
+      .then(function () {
+        saveSubmitted(email);
+        form.style.display = "none";
+        msg.textContent = "🐱已收到！请前往邮箱确认一下。垃圾箱也瞅瞅。";
+        msg.className = "kit-subscribe-msg kit-subscribe-msg--ok";
+      })
+      .catch(function () {
+        btn.disabled = false;
+        input.disabled = false;
+        btn.textContent = "发！";
+        msg.textContent = "🫤出了点小问题，再试一次吧。还是不行就联系我邮箱！";
+        msg.className = "kit-subscribe-msg kit-subscribe-msg--err";
+      });
+  });
+})();
+</script>

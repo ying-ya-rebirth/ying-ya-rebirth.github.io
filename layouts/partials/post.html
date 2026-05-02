@@ -36,6 +36,7 @@
               </div>
             </div>
           </div>
+          {{ partial "color-mode-banner.html" . }}
         </div>
       </div>
     </div>
@@ -48,7 +49,6 @@
               <div id="post-header" class="file-header d-flex flex-md-items-center flex-items-start sticky-header" style="z-index: 2">
                 <div class="file-info d-flex flex-md-items-center flex-items-start flex-order-1 flex-auto">
                   <div class="text-mono f6 flex-auto pr-3 flex-order-2 flex-md-order-1 mt-2 mt-md-0">
-                    <!-- Copied from github -->
                     <summary id="toc-toggle" onclick="clickToc()" class="btn btn-octicon m-0 mr-2 p-2">
                       <svg aria-hidden="true" viewBox="0 0 16 16" height="16" width="16" class="octicon octicon-list-unordered">
                         <path fill-rule="evenodd" d="M2 4a1 1 0 100-2 1 1 0 000 2zm3.75-1.5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zm0 5a.75.75 0 000 1.5h8.5a.75.75 0 000-1.5h-8.5zM3 8a1 1 0 11-2 0 1 1 0 012 0zm-1 6a1 1 0 100-2 1 1 0 000 2z"></path>
@@ -61,9 +61,6 @@
                       </div>
                     </details-menu>
                       {{ countwords .Content }} Words
-                    <!-- <span class="file-info-divider"></span>
-                                        {{ .ReadingTime }} min -->
-
                   </div>
                   <div class="file-actions flex-order-2 pt-0">
                     {{ with .Params.tags }}
@@ -81,7 +78,6 @@
                   </div>
                 </div>
               </div>
-
 
               <div class="Box-body px-5 pb-5" style="z-index: 1">
                 <article class="markdown-body entry-content container-lg">

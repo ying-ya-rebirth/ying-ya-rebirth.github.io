@@ -1,72 +1,93 @@
+<!-- 右下角悬浮阅读设置按钮 -->
+<a href="javascript:void(0)" id="accessibility-toggle" class="accessibility-fab no-select" title="阅读设置" aria-label="阅读设置">
+  <svg width="26" height="20" viewBox="0 0 30 24" aria-hidden="true">
+    <text x="0" y="19" font-size="22" font-family="Georgia, serif" font-weight="600" fill="currentColor">A</text>
+    <text x="17" y="19" font-size="14" font-family="-apple-system, sans-serif" font-weight="400" fill="currentColor" opacity="0.6">a</text>
+  </svg>
+</a>
 
-<!-- Accessibility panel and toggle markup -->
+<!-- 阅读设置面板 -->
 <div id="accessibility-menu" class="accessibility-menu" style="display:none;">
-	<div class="accessibility-header">
-		<h3>无障碍设置</h3>
-		<button id="close-accessibility" class="close-btn" aria-label="关闭">×</button>
-	</div>
-	<div class="accessibility-options">
-		<div class="option-group">
-			<div class="option-item">
-				<!-- checkbox on the left so it's visible and easier to click -->
-				<div style="margin-right:12px;">
-					<input type="checkbox" id="reading-progress" aria-label="阅读进度" />
-				</div>
-				<div class="option-content">
-					<strong>阅读进度</strong>
-					<small>在页面顶部显示滚动进度条</small>
-				</div>
-			</div>
-		</div>
+  <div class="accessibility-header">
+    <h3>阅读设置</h3>
+    <button id="close-accessibility" class="close-btn" aria-label="关闭">×</button>
+  </div>
+  <div class="accessibility-options">
 
-		<div class="option-group">
-			<h4>字号</h4>
-			<div class="option-item">
-				<div class="option-content">
-					<div class="slider-label">当前字号： <span id="font-size-value">16px</span></div>
-					<input type="range" id="font-size" min="12" max="28" step="1" value="16" />
-				</div>
-			</div>
-		</div>
+    <div class="option-group">
+      <div class="option-item">
+        <div style="margin-right:12px;">
+          <input type="checkbox" id="reading-progress" aria-label="阅读进度" />
+        </div>
+        <div class="option-content">
+          <strong>阅读进度</strong>
+          <small>在页面顶部显示滚动进度条</small>
+        </div>
+      </div>
+    </div>
 
-		<div class="option-group">
-			<h4>行高</h4>
-			<div class="option-item">
-				<div class="option-content">
-					<div class="slider-label">当前行高： <span id="line-height-value">1.6</span></div>
-					<input type="range" id="line-height" min="1.2" max="2.4" step="0.1" value="1.6" />
-				</div>
-			</div>
-		</div>
+    <div class="option-group">
+      <h4>正文字体</h4>
+      <div class="font-toggle-wrap">
+        <button class="font-toggle-btn active" id="font-sans" onclick="setFont('sans')">
+          <span style="font-family: Consolas, monospace; font-size: 14px;">等宽体</span>
+        </button>
+        <button class="font-toggle-btn" id="font-serif" onclick="setFont('serif')">
+          <span style="font-family: 'FangSong', 'STFangsong', Georgia, serif; font-size: 14px;">仿宋体</span>
+        </button>
+        <button class="font-toggle-btn" id="font-mono" onclick="setFont('mono')">
+          <span style="font-family: 'KaiTi', 'STKaiti', Palatino, serif; font-size: 14px;">手书体</span>
+        </button>
+      </div>
+    </div>
 
-		<div class="option-group">
-			<h4>字间距</h4>
-			<div class="option-item">
-				<div class="option-content">
-					<div class="slider-label">当前字间距： <span id="letter-spacing-value">0px</span></div>
-					<input type="range" id="letter-spacing" min="0" max="4" step="0.5" value="0" />
-				</div>
-			</div>
-		</div>
+    <div class="option-group">
+      <h4>字号</h4>
+      <div class="option-item">
+        <div class="option-content">
+          <div class="slider-label">当前字号： <span id="font-size-value">16px</span></div>
+          <input type="range" id="font-size" min="12" max="28" step="1" value="16" />
+        </div>
+      </div>
+    </div>
 
-		<div class="option-group">
-			<h4>棕色滤镜</h4>
-			<div class="option-item">
-				<div class="option-content">
-					<div class="slider-label">滤镜强度： <span id="brown-filter-value">0%</span></div>
-					<input type="range" id="brown-filter" min="0" max="100" step="5" value="0" />
-				</div>
-			</div>
-		</div>
+    <div class="option-group">
+      <h4>行高</h4>
+      <div class="option-item">
+        <div class="option-content">
+          <div class="slider-label">当前行高： <span id="line-height-value">1.6</span></div>
+          <input type="range" id="line-height" min="1.2" max="2.4" step="0.1" value="1.6" />
+        </div>
+      </div>
+    </div>
 
-		<div class="option-group">
-			<button id="reset-settings" class="reset-btn">恢复默认</button>
-		</div>
-	</div>
+    <div class="option-group">
+      <h4>字间距</h4>
+      <div class="option-item">
+        <div class="option-content">
+          <div class="slider-label">当前字间距： <span id="letter-spacing-value">0px</span></div>
+          <input type="range" id="letter-spacing" min="0" max="4" step="0.5" value="0" />
+        </div>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <h4>棕色滤镜</h4>
+      <div class="option-item">
+        <div class="option-content">
+          <div class="slider-label">滤镜强度： <span id="brown-filter-value">0%</span></div>
+          <input type="range" id="brown-filter" min="0" max="100" step="5" value="0" />
+        </div>
+      </div>
+    </div>
+
+    <div class="option-group">
+      <button id="reset-settings" class="reset-btn">恢复默认</button>
+    </div>
+  </div>
 </div>
 
-<!-- Reading progress bar (kept) -->
+<!-- 阅读进度条 -->
 <div id="reading-progress-bar" class="reading-progress-bar" style="display:none;">
-	<div class="progress-fill"></div>
+  <div class="progress-fill"></div>
 </div>
-

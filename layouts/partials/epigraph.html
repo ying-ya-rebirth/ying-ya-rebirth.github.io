@@ -1,0 +1,19 @@
+{{- $quotes := site.Data.epigraphs -}}
+{{- if $quotes -}}
+<p id="epigraph-text" style="
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--color-text-secondary, #57606a);
+  font-style: italic;
+"></p>
+<script>
+(function() {
+  var quotes = {{ $quotes | jsonify }};
+  var el = document.getElementById('epigraph-text');
+  if (el && quotes.length) {
+    el.textContent = quotes[Math.floor(Math.random() * quotes.length)];
+  }
+})();
+</script>
+{{- end -}}

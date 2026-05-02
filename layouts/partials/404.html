@@ -1,0 +1,73 @@
+{{ define "content" }}
+<div class="application-main">
+  <div style="
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  ">
+
+    <div style="font-size: 96px; line-height: 1; margin-bottom: 16px; animation: bob 3s ease-in-out infinite;">😿</div>
+
+    <style>
+      @keyframes bob {
+        0%,100% { transform: translateY(0); }
+        50%      { transform: translateY(-8px); }
+      }
+    </style>
+
+    <div style="max-width: 400px;">
+      <h1 style="
+        font-size: 72px;
+        font-weight: 700;
+        line-height: 1;
+        margin: 0 0 12px;
+        color: #b4b2a9;
+        letter-spacing: -2px;
+      ">404</h1>
+
+      <p style="
+        font-size: 17px;
+        font-weight: 500;
+        color: #b4b2a9;
+        margin: 0 0 8px;
+      ">这一页不见了</p>
+
+      <p style="
+        font-size: 13px;
+        color: #c8c6bc;
+        margin: 0 0 32px;
+        line-height: 1.7;
+      ">
+        可能从来没存在过，可能已经飘走了，<br>也可能是猫猫找不到路。
+      </p>
+
+      <a href="{{ .Site.BaseURL }}" style="
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 9px 20px;
+        background: var(--color-btn-bg, #fafbfc);
+        border: 1px solid var(--color-border-primary);
+        border-radius: 6px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #b4b2a9;
+        text-decoration: none;
+        transition: background 0.15s;
+      " onmouseover="this.style.background='var(--color-btn-hover-bg,#f3f4f6)'"
+         onmouseout="this.style.background='var(--color-btn-bg,#fafbfc)'">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z"/>
+        </svg>
+        回到首页
+      </a>
+    </div>
+
+  </div>
+</div>
+{{ end }}
