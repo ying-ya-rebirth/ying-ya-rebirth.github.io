@@ -1,0 +1,117 @@
+/* ── Reactions ── */
+.post-reactions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 24px 0 8px;
+  border-top: 1px solid var(--color-border-primary);
+  margin-top: 32px;
+}
+
+.post-reactions-label {
+  width: 100%;
+  font-size: 13px;
+  color: var(--color-text-secondary, #57606a);
+  margin-bottom: 4px;
+}
+
+.reaction-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 2em;
+  border: 1px solid var(--color-border-primary);
+  background: transparent;
+  color: var(--color-text-primary, #24292f);
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+  user-select: none;
+}
+
+.reaction-btn:hover {
+  background: var(--color-btn-hover-bg, #f3f4f6);
+  transform: scale(1.08);
+}
+
+.reaction-btn.reacted {
+  background: var(--color-accent-subtle, #ddf4ff);
+  border-color: var(--color-accent-emphasis, #0969da);
+  color: var(--color-accent-fg, #0969da);
+}
+
+.reaction-btn .emoji {
+  font-size: 17px;
+  line-height: 1;
+}
+
+.reaction-btn .reaction-label {
+  font-size: 12px;
+  color: inherit;
+  opacity: 0.75;
+}
+
+.reaction-btn.reacted .reaction-label {
+  opacity: 1;
+}
+
+.reaction-btn .count {
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 10px;
+  text-align: center;
+}
+
+/* ── Back to top ── */
+#back-to-top {
+  position: fixed;
+  bottom: 76px;
+  right: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border-primary);
+  background: var(--color-bg-primary, #fff);
+  color: var(--color-text-secondary, #57606a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.12s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  z-index: 9997;
+}
+
+#back-to-top.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#back-to-top:hover {
+  background: var(--color-btn-hover-bg, #f3f4f6);
+  transform: translateY(-2px);
+}
+
+#back-to-top svg {
+  fill: currentColor;
+}
+
+@media (max-width: 480px) {
+  #back-to-top {
+    bottom: 68px;
+    right: 16px;
+  }
+}
+
+.post-reactions-igiari-notice {
+  display: none;
+  width: 100%;
+  margin: 4px 0 0;
+  font-size: 13px;
+  color: var(--color-text-secondary, #57606a);
+  transition: opacity 0.3s;
+}
