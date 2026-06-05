@@ -1,0 +1,191 @@
+/* Pride Month Theme — Gilbert Baker Rainbow Palette
+   Red #E40303 · Orange #FF8C00 · Yellow #FFED00
+   Green #008026 · Blue #24408E · Violet #732982 */
+
+[data-color-mode="pride"] {
+  --pride-red: #E40303;
+  --pride-orange: #FF8C00;
+  --pride-yellow: #FFED00;
+  --pride-green: #008026;
+  --pride-blue: #24408E;
+  --pride-violet: #732982;
+  --pride-rainbow: linear-gradient(
+    90deg,
+    var(--pride-red),
+    var(--pride-orange),
+    var(--pride-yellow),
+    var(--pride-green),
+    var(--pride-blue),
+    var(--pride-violet)
+  );
+
+  /* Canvas & backgrounds */
+  --color-canvas-default: #1a1025;
+  --color-canvas-default-transparent: rgba(26, 16, 37, 0);
+  --color-canvas-overlay: #221833;
+  --color-canvas-inset: #1f1530;
+  --color-canvas-subtle: #2a1f3d;
+  --color-page-header-bg: #1a1025;
+
+  --color-bg-primary: #1a1025;
+  --color-bg-secondary: #221833;
+  --color-bg-tertiary: #2a1f3d;
+  --color-bg-canvas: #1a1025;
+  --color-bg-canvas-inset: #1f1530;
+  --color-bg-canvas-mobile: #1a1025;
+  --color-bg-overlay: #221833;
+  --color-bg-backdrop: rgba(26, 16, 37, 0.75);
+  --color-bg-table-of-contents-container: #221833;
+  --color-bg-table-of-contents-option-selected: var(--pride-violet);
+  --color-fg-table-of-contents-option-selected: #ffffff;
+
+  /* Text */
+  --color-fg-default: #f0e6ff;
+  --color-fg-muted: #b8a8cc;
+  --color-fg-subtle: #9585ab;
+  --color-fg-on-emphasis: #ffffff;
+  --color-text-primary: #f0e6ff;
+  --color-text-secondary: #b8a8cc;
+  --color-text-tertiary: #9585ab;
+  --color-text-white: #ffffff;
+
+  /* Accent & links */
+  --color-accent-fg: #d4a0ff;
+  --color-accent-emphasis: #c77dff;
+  --color-accent-muted: rgba(199, 125, 255, 0.4);
+  --color-accent-subtle: rgba(115, 41, 130, 0.25);
+
+  /* Borders */
+  --color-border-primary: #3d2f55;
+  --color-border-secondary: #4a3a66;
+  --color-border-tertiary: #5c4a78;
+  --color-border-muted: rgba(199, 125, 255, 0.2);
+  --color-border-default: #3d2f55;
+  --color-border-overlay: #4a3a66;
+
+  /* Header */
+  --color-header-bg: transparent;
+  --color-header-logo: #ffffff;
+  --color-header-text: rgba(255, 255, 255, 0.85);
+  --color-header-divider: rgba(255, 255, 255, 0.3);
+  --color-header-search-bg: rgba(0, 0, 0, 0.25);
+  --color-header-search-border: rgba(255, 255, 255, 0.2);
+
+  /* Buttons */
+  --color-btn-bg: #2a1f3d;
+  --color-btn-border: #4a3a66;
+  --color-btn-hover-bg: #352848;
+  --color-btn-active-bg: #3d2f55;
+  --color-btn-text: #f0e6ff;
+  --color-btn-primary-bg: var(--pride-green);
+  --color-btn-primary-hover-bg: #00a030;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-outline-text: var(--pride-blue);
+  --color-btn-outline-hover-bg: var(--pride-blue);
+
+  /* Inputs */
+  --color-input-bg: #221833;
+  --color-input-border: #4a3a66;
+  --color-input-contrast-bg: #2a1f3d;
+  --color-input-disabled-bg: #1f1530;
+  --color-input-disabled-border: #3d2f55;
+
+  /* Menu & navigation */
+  --color-menu-bg-active: rgba(199, 125, 255, 0.15);
+  --color-menu-border-active: var(--pride-orange);
+  --color-menu-heading-text: #f0e6ff;
+  --color-underlinenav-border-hover: rgba(199, 125, 255, 0.3);
+  --color-underlinenav-icon: #b8a8cc;
+
+  /* Action list */
+  --color-action-list-item-default-hover-bg: rgba(199, 125, 255, 0.12);
+  --color-action-list-item-default-active-bg: rgba(199, 125, 255, 0.2);
+  --color-action-list-item-default-selected-bg: rgba(199, 125, 255, 0.15);
+
+  /* Markdown */
+  --color-markdown-blockquote-border: var(--pride-violet);
+  --color-markdown-code-bg: rgba(115, 41, 130, 0.2);
+  --color-markdown-frame-border: #4a3a66;
+  --color-markdown-table-border: #4a3a66;
+  --color-markdown-table-tr-border: #3d2f55;
+
+  /* Labels & tags */
+  --color-topic-tag-border: rgba(199, 125, 255, 0.3);
+  --color-label-primary-text: #f0e6ff;
+  --color-label-secondary-text: #b8a8cc;
+  --color-label-info-text: var(--pride-blue);
+  --color-label-success-text: var(--pride-green);
+  --color-label-warning-text: var(--pride-yellow);
+  --color-label-danger-text: var(--pride-red);
+  --color-label-orange-text: var(--pride-orange);
+
+  /* Icons */
+  --color-icon-primary: #f0e6ff;
+  --color-icon-secondary: #b8a8cc;
+  --color-icon-tertiary: #9585ab;
+  --color-icon-info: var(--pride-blue);
+  --color-icon-success: var(--pride-green);
+  --color-icon-warning: var(--pride-yellow);
+  --color-icon-danger: var(--pride-red);
+
+  /* Profile toggle */
+  --color-profile-color-modes-toggle-moon: var(--pride-yellow);
+  --color-profile-color-modes-toggle-thumb-bg: var(--pride-violet);
+  --color-profile-color-modes-toggle-track-bg: #2a1f3d;
+  --color-profile-color-modes-toggle-track-border: #5c4a78;
+  --color-promo-color-modes-toggle-moon: var(--pride-yellow);
+  --color-promo-color-modes-toggle-thumb-bg: var(--pride-violet);
+  --color-promo-color-modes-toggle-track-bg: #2a1f3d;
+  --color-promo-color-modes-toggle-track-border: #5c4a78;
+
+  /* Syntax highlighting — rainbow token colors */
+  --color-prettylights-syntax-comment: #9585ab;
+  --color-prettylights-syntax-constant: var(--pride-blue);
+  --color-prettylights-syntax-entity: var(--pride-violet);
+  --color-prettylights-syntax-keyword: var(--pride-red);
+  --color-prettylights-syntax-string: var(--pride-green);
+  --color-prettylights-syntax-variable: var(--pride-orange);
+  --color-prettylights-syntax-entity-tag: var(--pride-green);
+  --color-prettylights-syntax-markup-heading: var(--pride-blue);
+  --color-prettylights-syntax-markup-bold: #f0e6ff;
+  --color-prettylights-syntax-markup-italic: #e0d0f0;
+  --color-prettylights-syntax-markup-list: var(--pride-yellow);
+  --color-prettylights-syntax-markup-inserted-text: var(--pride-green);
+  --color-prettylights-syntax-markup-deleted-text: var(--pride-red);
+  --color-prettylights-syntax-markup-changed-text: var(--pride-orange);
+  --color-prettylights-syntax-string-regexp: var(--pride-green);
+  --color-prettylights-syntax-brackethighlighter-angle: #b8a8cc;
+  --color-prettylights-syntax-brackethighlighter-unmatched: var(--pride-red);
+  --color-prettylights-syntax-meta-diff-range: var(--pride-violet);
+  --color-prettylights-syntax-storage-modifier-import: #f0e6ff;
+  --color-prettylights-syntax-constant-other-reference-link: var(--pride-blue);
+
+  /* Scale overrides for components using scale colors */
+  --color-scale-blue-0: rgba(36, 64, 142, 0.15);
+  --color-scale-blue-5: var(--pride-blue);
+  --color-scale-blue-6: #1a3068;
+  --color-scale-green-0: rgba(0, 128, 38, 0.15);
+  --color-scale-green-5: var(--pride-green);
+  --color-scale-red-0: rgba(228, 3, 3, 0.15);
+  --color-scale-red-5: var(--pride-red);
+  --color-scale-purple-0: rgba(115, 41, 130, 0.15);
+  --color-scale-purple-5: var(--pride-violet);
+  --color-scale-orange-0: rgba(255, 140, 0, 0.15);
+  --color-scale-orange-5: var(--pride-orange);
+  --color-scale-yellow-0: rgba(255, 237, 0, 0.1);
+  --color-scale-yellow-5: var(--pride-yellow);
+
+  /* Misc */
+  --color-counter-border: rgba(199, 125, 255, 0.2);
+  --color-overlay-shadow: 0 1px 3px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(115, 41, 130, 0.2);
+  --color-shadow-small: 0 1px 0 rgba(115, 41, 130, 0.15);
+  --color-shadow-medium: 0 3px 6px rgba(115, 41, 130, 0.2);
+  --color-shadow-large: 0 8px 24px rgba(115, 41, 130, 0.25);
+  --color-social-count-bg: #2a1f3d;
+  --color-project-card-bg: #221833;
+  --color-project-sidebar-bg: #1a1025;
+  --color-notifications-row-bg: #221833;
+  --color-notifications-row-read-bg: #1a1025;
+  --color-footer-invertocat-octicon: #b8a8cc;
+  --color-footer-invertocat-octicon-hover: #f0e6ff;
+}

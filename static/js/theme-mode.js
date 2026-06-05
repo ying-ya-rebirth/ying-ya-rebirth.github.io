@@ -1,13 +1,19 @@
+const THEMES = ['pride', 'light', 'dark'];
+const DEFAULT_THEME = 'pride';
+
+const THEME_COLORS = {
+  light: '#ffffff',
+  dark: '#0d1117',
+  pride: '#732982',
+};
+
 function switchTheme() {
-  const currentStyle = currentTheme()
-  if (currentStyle === 'light') {
-    setTheme('dark')
-    setIconTheme('dark')
-  }
-  else {
-    setTheme('light')
-    setIconTheme('light')
-  }
+  const current = currentTheme();
+  const idx = THEMES.indexOf(current);
+  const next = THEMES[(idx + 1) % THEMES.length];
+  setTheme(next);
+  setIconTheme(next);
+  updateThemeMeta(next);
 }
 
 function setTheme(style) {
@@ -19,33 +25,48 @@ function setTheme(style) {
 }
 
 function setIconTheme(theme) {
-  const twitterIconElement = document.getElementById('twitter-icon')
-  const githubIconElement = document.getElementById('github-icon')
+  const twitterIconElement = document.getElementById('twitter-icon');
+  const githubIconElement = document.getElementById('github-icon');
+
   if (twitterIconElement) {
     if (theme === 'light') {
-      twitterIconElement.setAttribute("fill", "black")
-    } else if (theme === 'dark') {
-      twitterIconElement.setAttribute("fill", "white")
+      twitterIconElement.setAttribute('fill', 'black');
+    } else {
+      twitterIconElement.setAttribute('fill', 'white');
     }
   }
 
   if (githubIconElement) {
     if (theme === 'light') {
-      githubIconElement.removeAttribute('color')
-      githubIconElement.removeAttribute('class')
-    } else if (theme === 'dark') {
-      githubIconElement.setAttribute('class', 'octicon')
-      githubIconElement.setAttribute('color', '#f0f6fc')
+      githubIconElement.removeAttribute('color');
+      githubIconElement.removeAttribute('class');
+      githubIconElement.setAttribute('fill', '#24292e');
+    } else {
+      githubIconElement.removeAttribute('fill');
+      githubIconElement.setAttribute('class', 'octicon');
+      githubIconElement.setAttribute('color', '#f0f6fc');
     }
+  }
+}
+
+function updateThemeMeta(theme) {
+  const meta = document.querySelector('meta[name="theme-color"]');
+  if (meta) {
+    meta.setAttribute('content', THEME_COLORS[theme] || THEME_COLORS.pride);
   }
 }
 
 function currentTheme() {
   const localStyle = localStorage.getItem('data-color-mode');
-  const systemStyle = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-  return localStyle || systemStyle;
+  if (localStyle && THEMES.includes(localStyle)) {
+    return localStyle;
+  }
+  return DEFAULT_THEME;
 }
 
 (() => {
-  setTheme(currentTheme());
+  const theme = currentTheme();
+  setTheme(theme);
+  setIconTheme(theme);
+  updateThemeMeta(theme);
 })();

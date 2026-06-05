@@ -12,10 +12,12 @@
 .polaroid-tags{display:flex;flex-wrap:wrap;gap:6px}
 .polaroid-tag{background:#f2f4f6;border:1px solid #e1e4e8;border-radius:999px;padding:2px 8px;font-size:12px;color:#57606a}
 @media(prefers-color-scheme:dark){.polaroid{background:#0d1117;box-shadow:0 2px 6px rgba(0,0,0,.5)}.polaroid-tag{background:#161b22;border-color:#30363d;color:#8b949e}}
+[data-color-mode="pride"] .polaroid{background:#221833;box-shadow:0 2px 6px rgba(115,41,130,.4)}[data-color-mode="pride"] .polaroid-tag{background:rgba(115,41,130,.25);border-color:#4a3a66;color:#b8a8cc}
 .gallery-modal{position:fixed;inset:0;z-index:1050}
 .gallery-modal-backdrop{position:absolute;inset:0;background:rgba(0,0,0,.6)}
 .gallery-modal-content{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);max-width:min(90vw,1100px);max-height:90vh;background:var(--bg,#fff);border-radius:6px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.4)}
 @media(prefers-color-scheme:dark){.gallery-modal-content{--bg:#0d1117}}
+[data-color-mode="pride"] .gallery-modal-content{--bg:#221833}
 .gallery-modal-close{position:absolute;right:8px;top:4px;background:transparent;border:none;font-size:28px;line-height:1;color:#fff;cursor:pointer;z-index:1}
 .gallery-modal-img{display:block;max-width:100%;max-height:80vh;width:auto;height:auto;margin:0 auto}
 .gallery-modal-info{padding:8px 12px;color:var(--color-fg-default,#24292f)}

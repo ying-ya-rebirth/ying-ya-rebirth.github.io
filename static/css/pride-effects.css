@@ -1,0 +1,208 @@
+/* Pride Month — visual rainbow effects */
+
+/* Rainbow stripe at page top */
+[data-color-mode="pride"] body::before {
+  content: "";
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--pride-rainbow);
+  z-index: 9999;
+  pointer-events: none;
+}
+
+/* Rainbow header gradient */
+[data-color-mode="pride"] .Header {
+  background: var(--pride-rainbow) !important;
+  box-shadow: 0 2px 12px rgba(115, 41, 130, 0.4);
+}
+
+[data-color-mode="pride"] .Header-link,
+[data-color-mode="pride"] .Header-item {
+  color: #ffffff !important;
+}
+
+[data-color-mode="pride"] .Header-link:hover {
+  color: var(--pride-yellow) !important;
+}
+
+/* Avatar rainbow ring */
+[data-color-mode="pride"] .avatar-user {
+  box-shadow:
+    0 0 0 3px #E40303,
+    0 0 0 5px #FF8C00,
+    0 0 0 7px #FFED00,
+    0 0 0 9px #008026,
+    0 0 0 11px #24408E,
+    0 0 0 13px #732982;
+}
+
+/* Links with rainbow underline on hover */
+[data-color-mode="pride"] a:not(.Header-link):not(.btn):not(.social-count):hover {
+  text-decoration-color: transparent;
+  background-image: var(--pride-rainbow);
+  background-size: 100% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+}
+
+/* Active nav underline */
+[data-color-mode="pride"] .UnderlineNav-item.selected,
+[data-color-mode="pride"] .UnderlineNav-item[aria-current="page"] {
+  border-bottom-color: transparent;
+  border-image: var(--pride-rainbow) 1;
+}
+
+/* Blockquote rainbow left border */
+[data-color-mode="pride"] blockquote {
+  border-left: 4px solid transparent;
+  border-image: linear-gradient(
+    180deg,
+    #E40303,
+    #FF8C00,
+    #FFED00,
+    #008026,
+    #24408E,
+    #732982
+  ) 1;
+  background: rgba(115, 41, 130, 0.08);
+  border-radius: 0 6px 6px 0;
+}
+
+/* Code blocks */
+[data-color-mode="pride"] pre,
+[data-color-mode="pride"] .highlight pre {
+  border: 1px solid transparent;
+  border-image: linear-gradient(
+    135deg,
+    rgba(228, 3, 3, 0.4),
+    rgba(255, 140, 0, 0.4),
+    rgba(255, 237, 0, 0.4),
+    rgba(0, 128, 38, 0.4),
+    rgba(36, 64, 142, 0.4),
+    rgba(115, 41, 130, 0.4)
+  ) 1;
+}
+
+[data-color-mode="pride"] code:not(pre code) {
+  background: rgba(115, 41, 130, 0.25);
+  border-radius: 4px;
+}
+
+/* Topic tags */
+[data-color-mode="pride"] .topic-tag,
+[data-color-mode="pride"] .Label {
+  background: rgba(115, 41, 130, 0.2);
+  border: 1px solid rgba(199, 125, 255, 0.35);
+}
+
+[data-color-mode="pride"] .topic-tag:hover,
+[data-color-mode="pride"] .Label:hover {
+  background: rgba(199, 125, 255, 0.2);
+  border-color: var(--pride-violet);
+}
+
+/* Theme toggle — three-position thumb (pride / light / dark) */
+[data-color-mode="pride"] .profile-color-modes-toggle-thumb {
+  transform: translateX(0);
+}
+
+[data-color-mode="light"] .profile-color-modes-toggle-thumb {
+  transform: translateX(9px);
+}
+
+[data-color-mode="dark"] .profile-color-modes-toggle-thumb {
+  transform: translateX(18px);
+}
+
+[data-color-mode="pride"] .profile-color-modes-toggle-track {
+  background: #2a1f3d !important;
+  border-color: var(--pride-violet) !important;
+}
+
+/* Post title accent */
+[data-color-mode="pride"] .markdown-body h1,
+[data-color-mode="pride"] .markdown-body h2 {
+  background: var(--pride-rainbow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+[data-color-mode="pride"] .markdown-body h3,
+[data-color-mode="pride"] .markdown-body h4 {
+  color: #d4a0ff;
+}
+
+/* Horizontal rule rainbow */
+[data-color-mode="pride"] .markdown-body hr {
+  border: none;
+  height: 3px;
+  background: var(--pride-rainbow);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+/* Table header */
+[data-color-mode="pride"] .markdown-body table th {
+  background: rgba(115, 41, 130, 0.2);
+  border-bottom: 2px solid var(--pride-violet);
+}
+
+/* Footer subtle rainbow */
+[data-color-mode="pride"] footer,
+[data-color-mode="pride"] .footer {
+  border-top: 2px solid transparent;
+  border-image: var(--pride-rainbow) 1;
+}
+
+/* Scrollbar (webkit) */
+[data-color-mode="pride"] ::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #732982, #24408E, #008026);
+  border-radius: 4px;
+}
+
+[data-color-mode="pride"] ::-webkit-scrollbar-track {
+  background: #1a1025;
+}
+
+/* Selection highlight */
+[data-color-mode="pride"] ::selection {
+  background: rgba(199, 125, 255, 0.4);
+  color: #ffffff;
+}
+
+/* Social count button */
+[data-color-mode="pride"] .social-count {
+  border-color: rgba(199, 125, 255, 0.3);
+}
+
+[data-color-mode="pride"] .social-count:hover {
+  background: rgba(199, 125, 255, 0.15);
+}
+
+/* Box containers */
+[data-color-mode="pride"] .Box {
+  border-color: #3d2f55;
+  background: #221833;
+}
+
+[data-color-mode="pride"] .Box-header {
+  background: rgba(115, 41, 130, 0.15);
+  border-bottom: 1px solid #4a3a66;
+}
+
+/* Subtle animated shimmer on header (optional, gentle) */
+@keyframes pride-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+[data-color-mode="pride"] .Header {
+  background-size: 200% 100%;
+  animation: pride-shimmer 8s ease infinite;
+}

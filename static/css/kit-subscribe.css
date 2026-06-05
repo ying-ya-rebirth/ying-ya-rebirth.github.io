@@ -146,3 +146,18 @@
   --kit-ok:               #3fb950;
   --kit-err:              #f85149;
 }
+
+/* ── Pride mode ── */
+[data-color-mode="pride"],
+[data-color-mode="pride"] body {
+  --kit-text:             #f0e6ff;
+  --kit-muted:            #b8a8cc;
+  --kit-placeholder:      #9585ab;
+  --kit-border:           #4a3a66;
+  --kit-focus:            #c77dff;
+  --kit-input-bg:         #221833;
+  --kit-btn-hover-bg:     #352848;
+  --kit-btn-hover-border: #c77dff;
+  --kit-ok:               #008026;
+  --kit-err:              #E40303;
+}
