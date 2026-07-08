@@ -112,3 +112,28 @@
     </div>
   </span>
 </div>
+
+<style>
+/* Neumorphism 日夜开关（试验版，之后整理到独立 CSS / 加 ink 版本切换） */
+/* Light：浅灰软塑料 */
+.profile-color-modes-toggle-track {
+  border: none !important;
+  background-color: #e6e7e9 !important;
+  box-shadow: inset 2px 2px 5px #c2c4c8, inset -2px -2px 5px #ffffff !important;
+}
+.profile-color-modes-toggle-thumb {
+  background-color: #eceef0 !important;
+  box-shadow: 3px 3px 6px #c2c4c8, -3px -3px 6px #ffffff !important;
+  --color-profile-color-modes-toggle-moon: #9a9ca1 !important;
+}
+/* Dark：深灰软塑料 */
+[data-color-mode="dark"] .profile-color-modes-toggle-track {
+  background-color: #2a2b31 !important;
+  box-shadow: inset 2px 2px 5px #191a1f, inset -2px -2px 5px #3b3d45 !important;
+}
+[data-color-mode="dark"] .profile-color-modes-toggle-thumb {
+  background-color: #34353d !important;
+  box-shadow: 3px 3px 6px #191a1f, -3px -3px 6px #3b3d45 !important;
+  --color-profile-color-modes-toggle-moon: #f8e3a1 !important;
+}
+</style>
