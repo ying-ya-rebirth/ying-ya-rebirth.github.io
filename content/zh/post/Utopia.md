@@ -2,7 +2,7 @@
 draft = false
 title = "乌托邦"
 date = 2025-07-11
-tags = ["社会学"]
+tags = ["社会"]
 categories = ["知识"]
 summary = "乌托邦即反乌托邦。"
 +++

@@ -3,7 +3,9 @@ draft = false
 title = "独立日"
 date = 2026-07-08
 tags = ["虚构"]
-categories = ["短篇小说"]
+categories = ["小说"]
+
+summary = "我们如何想象人与模型的关系。"
 +++
 *写作：蚜英*
 
