@@ -39,8 +39,7 @@ staticDir = "static"
   enableGitalk = true
   custom_css = []
   custom_js = []
-  enableSearch = true 
-  galleryEnabled = true
+  enableSearch = true
 
   # Gallery configuration for user profile
   # GitHub repo that stores gallery images and optional index.json
