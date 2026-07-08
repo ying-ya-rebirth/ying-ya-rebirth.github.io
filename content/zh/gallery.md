@@ -1,8 +1,9 @@
 ---
 title: "Gallery"
-date: 2024-01-01T00:00:00+08:00
+date: 2026-07-05T00:00:00+08:00
 draft: false
 type: "gallery"
+image: "https://raw.githubusercontent.com/ying-ya-rebirth/ying-ya-gallery/main/gallery/1783484928274.jpg"
 ---
 
 # Gallery

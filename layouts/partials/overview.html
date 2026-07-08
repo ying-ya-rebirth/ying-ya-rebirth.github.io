@@ -83,13 +83,21 @@
     </div>
 
     {{ $section := where .Site.RegularPages "Section" "in" (slice "post") }}
+    {{ $gallery := .Site.GetPage "/gallery" }}
     <div class="mt-4 position-relative" id="contributions" data='[{{ range $index, $elem := $section }}
 {
   "title": "{{ .Title }}",
   "link": "{{ .Permalink }}",
-  "publishDate": "{{ .PublishDate.Format "2006-01-02 15:04:05" }}"
+  "publishDate": "{{ .PublishDate.Format "2006-01-02 15:04:05" }}",
+  "image": "{{ with .Params.image }}{{ . }}{{ end }}"
 }{{ if ne $index (sub (len $section) 1) }},{{ end }}
-{{ end }}]'>
+{{ end }}{{ if and .Site.Params.galleryEnabled $gallery }},
+{
+  "title": "Gallery",
+  "link": "{{ $gallery.Permalink }}",
+  "publishDate": "{{ $gallery.PublishDate.Format "2006-01-02 15:04:05" }}",
+  "image": "{{ with $gallery.Params.image }}{{ . }}{{ end }}"
+}{{ end }}]'>
       <div class="js-yearly-contributions">
         <div class="position-relative">
           <h2 class="f4 text-normal mb-2" id="posts-count"></h2>
