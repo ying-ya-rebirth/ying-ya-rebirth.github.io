@@ -223,7 +223,7 @@
       {{ if .IsHome }}
       {{ block "overview" . }}{{ end }}
       {{ else if eq .Type "gallery" }}
-      {{/* Gallery pages don't need posts block */}}
+      {{ partial "gallery.html" . }}
       {{ else }}
       {{ block "posts" . }}{{ end }}
       {{ end }}
