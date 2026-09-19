@@ -22,7 +22,7 @@ let contributions;
       item.title = decodeURI(item.title);
     }
 
-    mergeGalleryImages().then(() => {
+    mergeGalleryImages(dom).then(() => {
       for (const item of contributions) {
         if (item.date.getFullYear() > year) {
           year = item.date.getFullYear();
@@ -50,26 +50,25 @@ function safeDecode(value) {
 }
 
 // 把图库 index.json 里的每张图也当作一条 post 合并进活动时间线。
-// 图库仓库、分支、路径都从首页 #gallery-section 的 data-* 属性读取，与 gallery.js 保持一致。
-async function mergeGalleryImages() {
-  const root = document.getElementById('gallery-section');
-  if (!root) {
+// 图库仓库、分支、路径从 #contributions 上的 data-gallery-* 属性读取（由 overview.html 从站点参数注入）。
+async function mergeGalleryImages(dom) {
+  if (!dom) {
     return;
   }
 
-  const owner = root.getAttribute('data-owner') || '';
-  const repo = root.getAttribute('data-repo') || '';
+  const owner = dom.getAttribute('data-gallery-owner') || '';
+  const repo = dom.getAttribute('data-gallery-repo') || '';
   if (!owner || !repo) {
     return;
   }
 
-  const branch = root.getAttribute('data-branch') || 'main';
-  const path = (root.getAttribute('data-path') || 'gallery').replace(/^\/+|\/+$/g, '');
+  const branch = dom.getAttribute('data-gallery-branch') || 'main';
+  const path = (dom.getAttribute('data-gallery-path') || 'gallery').replace(/^\/+|\/+$/g, '');
   const base = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path ? path + '/' : ''}`;
 
   let data;
   try {
-    const res = await fetch(base + (root.getAttribute('data-index') || 'index.json'), { cache: 'no-store' });
+    const res = await fetch(base + (dom.getAttribute('data-gallery-index') || 'index.json'), { cache: 'no-store' });
     if (!res.ok) {
       return;
     }

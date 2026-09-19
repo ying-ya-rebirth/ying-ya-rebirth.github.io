@@ -84,7 +84,12 @@
 
     {{ $section := where .Site.RegularPages "Section" "in" (slice "post") }}
     {{ $gallery := .Site.GetPage "/gallery" }}
-    <div class="mt-4 position-relative" id="contributions" data='[{{ range $index, $elem := $section }}
+    <div class="mt-4 position-relative" id="contributions" {{ if .Site.Params.galleryEnabled }}
+      data-gallery-owner="{{ .Site.Params.galleryRepoOwner }}"
+      data-gallery-repo="{{ .Site.Params.galleryRepoName }}"
+      data-gallery-branch="{{ .Site.Params.galleryRepoBranch }}"
+      data-gallery-path="{{ .Site.Params.galleryPath }}"
+      data-gallery-index="{{ .Site.Params.galleryIndexFile }}" {{ end }} data='[{{ range $index, $elem := $section }}
 {
   "title": "{{ .Title }}",
   "link": "{{ .Permalink }}",
