@@ -5,25 +5,111 @@ let contributions;
 
 (() => {
   setRelativeTime();
-  const dom = document.querySelector('#contributions');
-  if (!dom) {
+  domReady().then(() => {
+    const dom = document.querySelector('#contributions');
+    if (!dom) {
+      return;
+    }
+
+    contributions = JSON.parse(dom.getAttribute('data'));
+    let year = 0;
+    for (const item of contributions) {
+      item.publishDate = decodeURI(item.publishDate).replace(' ', 'T');
+      item.date = new Date(item.publishDate);
+      if (item.date.getFullYear() > year) {
+        year = item.date.getFullYear();
+      }
+      item.title = decodeURI(item.title);
+    }
+
+    mergeGalleryImages().then(() => {
+      for (const item of contributions) {
+        if (item.date.getFullYear() > year) {
+          year = item.date.getFullYear();
+        }
+      }
+      yearList();
+      switchYear(year.toString());
+    });
+  });
+})();
+
+function domReady() {
+  if (document.readyState !== 'loading') {
+    return Promise.resolve();
+  }
+  return new Promise(resolve => document.addEventListener('DOMContentLoaded', resolve, { once: true }));
+}
+
+function safeDecode(value) {
+  try {
+    return decodeURI(value);
+  } catch (e) {
+    return value;
+  }
+}
+
+// 把图库 index.json 里的每张图也当作一条 post 合并进活动时间线。
+// 图库仓库、分支、路径都从首页 #gallery-section 的 data-* 属性读取，与 gallery.js 保持一致。
+async function mergeGalleryImages() {
+  const root = document.getElementById('gallery-section');
+  if (!root) {
     return;
   }
 
-  contributions = JSON.parse(dom.getAttribute('data'));
-  let year = 0;
-  for (const item of contributions) {
-    item.publishDate = decodeURI(item.publishDate).replace(' ', 'T');
-    item.date = new Date(item.publishDate);
-    if (item.date.getFullYear() > year) {
-      year = item.date.getFullYear();
-    }
-    item.title = decodeURI(item.title);
+  const owner = root.getAttribute('data-owner') || '';
+  const repo = root.getAttribute('data-repo') || '';
+  if (!owner || !repo) {
+    return;
   }
 
-  yearList();
-  switchYear(year.toString());
-})();
+  const branch = root.getAttribute('data-branch') || 'main';
+  const path = (root.getAttribute('data-path') || 'gallery').replace(/^\/+|\/+$/g, '');
+  const base = `https://raw.githubusercontent.com/${owner}/${repo}/${branch}/${path ? path + '/' : ''}`;
+
+  let data;
+  try {
+    const res = await fetch(base + (root.getAttribute('data-index') || 'index.json'), { cache: 'no-store' });
+    if (!res.ok) {
+      return;
+    }
+    data = await res.json();
+  } catch (e) {
+    // 图库取不到时静默跳过，不影响文章时间线
+    return;
+  }
+
+  const items = Array.isArray(data) ? data : (Array.isArray(data.items) ? data.items : []);
+  const seen = new Set();
+  for (const item of contributions) {
+    if (item.image) {
+      seen.add(item.image);
+    }
+  }
+
+  for (const it of items) {
+    const file = it.path || it.file || '';
+    const url = it.url || (file ? base + file : '');
+    if (!url || !it.date || seen.has(url)) {
+      continue;
+    }
+
+    const publishDate = `${it.date} 00:00:00`;
+    const date = new Date(publishDate.replace(' ', 'T'));
+    if (isNaN(date.getTime())) {
+      continue;
+    }
+
+    seen.add(url);
+    contributions.push({
+      title: safeDecode(it.title || file),
+      link: url,
+      publishDate: publishDate,
+      image: url,
+      date: date
+    });
+  }
+}
 
 function switchYear(year) {
   let startDate;
@@ -50,6 +136,12 @@ function switchYear(year) {
     }
   }
   posts.sort((a, b) => { return b - a });
+  // 图库条目是追加进来的，月份首次出现顺序不一定递减，这里按年月重新倒序
+  ms.sort((a, b) => {
+    const [aYear, aMonth] = a.split('-').map(Number);
+    const [bYear, bMonth] = b.split('-').map(Number);
+    return bYear - aYear || bMonth - aMonth;
+  });
   document.querySelector('#posts-activity').innerHTML = '';
   for (const time of ms) {
     const node = document.createElement('div');
