@@ -1,9 +1,10 @@
 .gallery-section{margin-top:16px}
-.gallery-masonry{column-count:1;column-gap:16px}
-@media(min-width:544px){.gallery-masonry{column-count:2}}
-@media(min-width:768px){.gallery-masonry{column-count:3}}
-@media(min-width:1012px){.gallery-masonry{column-count:4}}
-.polaroid{break-inside:avoid;display:inline-block;background:#fff;padding:8px 8px 16px 8px;margin:0 0 16px 0;box-shadow:0 2px 6px rgba(0,0,0,.15);border-radius:4px;transform:rotate(var(--tilt,0deg));transition:transform .2s ease}
+/* 用 grid 按行铺：从左上读到右下，最新的画落在最后一行的末尾 */
+.gallery-masonry{display:grid;grid-template-columns:1fr;gap:16px;align-items:start}
+@media(min-width:544px){.gallery-masonry{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:768px){.gallery-masonry{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1012px){.gallery-masonry{grid-template-columns:repeat(4,1fr)}}
+.polaroid{display:block;background:#fff;padding:8px 8px 16px 8px;margin:0;box-shadow:0 2px 6px rgba(0,0,0,.15);border-radius:4px;transform:rotate(var(--tilt,0deg));transition:transform .2s ease}
 .polaroid:hover{transform:rotate(var(--tilt,0deg)) translateY(-2px)}
 .polaroid-img{width:100%;height:auto;display:block;border-radius:2px}
 .polaroid-caption{margin-top:8px}
