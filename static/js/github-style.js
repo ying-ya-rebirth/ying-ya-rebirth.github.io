@@ -134,7 +134,8 @@ function switchYear(year) {
       }
     }
   }
-  posts.sort((a, b) => { return b - a });
+  // posts 里混着站点文章和追加进来的图库条目，统一按日期倒序（最近的在最上面）
+  posts.sort((a, b) => { return b.date - a.date });
   // 图库条目是追加进来的，月份首次出现顺序不一定递减，这里按年月重新倒序
   ms.sort((a, b) => {
     const [aYear, aMonth] = a.split('-').map(Number);
