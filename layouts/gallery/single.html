@@ -1,5 +1,10 @@
-{{ define "content" }}
-<div class="application-main">
-  {{ partial "user-profile.html" . }}
-</div>
+{{ define "main" }}
+<header class="inner-head"><a href="{{ .Site.Home.RelPermalink }}">Ya Ying</a><span>02 / DRAWINGS</span></header>
+<main class="gallery-page" id="gallery-page" data-gallery-owner="{{ .Site.Params.galleryRepoOwner }}" data-gallery-repo="{{ .Site.Params.galleryRepoName }}" data-gallery-branch="{{ .Site.Params.galleryRepoBranch }}" data-gallery-path="{{ .Site.Params.galleryPath }}" data-gallery-index="{{ .Site.Params.galleryIndexFile }}">
+  <div class="section-no">02 / DRAWINGS</div>
+  <h1>SKETCHES</h1>
+  <p class="gallery-intro">The traces of things still becoming.</p>
+  <div class="gallery-grid" id="gallery-grid"><p>Loading the archive…</p></div>
+  <p class="page-return"><a href="{{ .Site.Home.RelPermalink }}#archive">← BACK TO ARCHIVE</a></p>
+</main>
 {{ end }}

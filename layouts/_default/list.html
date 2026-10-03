@@ -1,6 +1,13 @@
-{{ define "content" }}
-<div class="application-main">
-  {{ partial "user-profile.html" . }}
-  {{ partial "posts.html" .}}
-</div>
+{{ define "main" }}
+<header class="inner-head"><a href="{{ .Site.Home.RelPermalink }}">Ya Ying</a><span>01 / INDEX</span></header>
+<main class="listing-page">
+  <div class="section-no">{{ if eq .Section "post" }}01 / INDEX{{ else }}FILE / {{ upper .Title }}{{ end }}</div>
+  <h1>{{ if eq .Section "post" }}WORDS{{ else }}{{ .Title }}{{ end }}</h1>
+  <ol class="post-list">
+    {{ range $index, $post := .Pages.ByDate.Reverse }}
+    <li><small>{{ printf "%02d" (add $index 1) }}</small><a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a><span>{{ with $post.Params.tags }}{{ index . 0 }}{{ else }}{{ $post.Date.Format "2006.01.02" }}{{ end }}</span></li>
+    {{ end }}
+  </ol>
+  <p class="page-return"><a href="{{ .Site.Home.RelPermalink }}#words">← BACK TO INDEX</a></p>
+</main>
 {{ end }}

@@ -1,6 +1,27 @@
-{{ define "content" }}
-<div class="application-main">
-  {{ partial "post.html" .}}
-  {{ partial "gitalk.html" . }}
-</div>
+{{ define "main" }}
+<header class="inner-head"><a href="{{ .Site.Home.RelPermalink }}">Ya Ying</a><span>03 / WORDS</span></header>
+<main class="article-page">
+  <article>
+    <div class="section-no">03 / WORDS</div>
+    <h1>{{ .Title }}</h1>
+    <p class="article-meta">{{ .Date.Format "2006.01.02" }}{{ with .Params.tags }}　/　{{ delimit . " · " }}{{ end }}</p>
+    <div class="article-body">{{ .Content }}</div>
+  </article>
+  {{ if eq .Section "post" }}
+    {{ $current := . }}
+    {{ $near := false }}
+    {{ $far := false }}
+    {{ range (where .Site.RegularPages "Section" "post").ByDate }}
+      {{ if lt .Date.Unix $current.Date.Unix }}{{ $far = . }}{{ end }}
+      {{ if and (gt .Date.Unix $current.Date.Unix) (not $near) }}{{ $near = . }}{{ end }}
+    {{ end }}
+    {{ if or $near $far }}
+    <nav class="article-neighbors" aria-label="相邻文章">
+      {{ with $near }}<a class="article-neighbor near" href="{{ .RelPermalink }}"><span class="article-neighbor-label">近一篇</span><span class="article-neighbor-title">{{ .Title }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></a>{{ end }}
+      {{ with $far }}<a class="article-neighbor far" href="{{ .RelPermalink }}"><span class="article-neighbor-label">远一篇</span><span class="article-neighbor-title">{{ .Title }}</span><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006.01.02" }}</time></a>{{ end }}
+    </nav>
+    {{ end }}
+  {{ end }}
+  <footer class="article-end"><a href="{{ .Site.Home.RelPermalink }}#words">← BACK TO WORDS</a><a href="mailto:{{ .Site.Params.email }}">WRITE TO ME ↗</a></footer>
+</main>
 {{ end }}

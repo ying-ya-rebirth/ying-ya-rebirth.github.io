@@ -1,3 +1,65 @@
-{{ define "content" }}
-{{ partial "home.html" . }}
+{{ define "main" }}
+<main>
+  <section class="cover" id="top" aria-label="Ya Ying">
+    <h1>Ya Ying</h1>
+    <span class="folio">00</span>
+    <p class="motto">To record is the last dignity.</p>
+    <img class="cover-art" src="{{ "images/hero-revised.jpg" | relURL }}" alt="蚜英绘制的淡蓝粉色人物与翅膀线稿">
+  </section>
+
+  <section class="archive" id="archive" aria-label="Archive" data-gallery-owner="{{ .Site.Params.galleryRepoOwner }}" data-gallery-repo="{{ .Site.Params.galleryRepoName }}" data-gallery-branch="{{ .Site.Params.galleryRepoBranch }}" data-gallery-path="{{ .Site.Params.galleryPath }}" data-gallery-index="{{ .Site.Params.galleryIndexFile }}">
+    <div class="room-label">A—01 / ARCHIVE</div>
+    <div class="carousel">
+      <div class="side left" aria-hidden="true"><img id="archive-prev-image" src="{{ "images/hero-original.jpg" | relURL }}" alt=""></div>
+      <div class="cel-wrap">
+        <div class="cel">
+          <span class="peg" aria-hidden="true"></span>
+          <img id="archive-image" src="{{ "images/hero-original.jpg" | relURL }}" alt="画稿局部">
+          <span class="cel-code" id="cel-code">A—01</span>
+          <i class="cross tl" aria-hidden="true"></i><i class="cross tr" aria-hidden="true"></i><i class="cross bl" aria-hidden="true"></i><i class="cross br" aria-hidden="true"></i>
+          <button class="cel-open" id="archive-open" type="button" aria-label="放大查看当前画作" aria-haspopup="dialog" disabled></button>
+        </div>
+      </div>
+      <div class="side right" aria-hidden="true"><img id="archive-next-image" src="{{ "images/hero-original.jpg" | relURL }}" alt=""></div>
+      <button class="arrow prev" type="button" aria-label="上一幅作品">←</button>
+      <button class="arrow next" type="button" aria-label="下一幅作品">→</button>
+    </div>
+    <p class="counter" id="counter" aria-live="polite">01 / 01</p>
+    <p class="caption" id="caption">an unfinished frame.</p>
+    <nav class="room-links" aria-label="展室入口"><a href="#words">WORDS</a><a href="{{ "gallery/" | relURL }}">SKETCHES</a></nav>
+  </section>
+
+  <dialog class="art-lightbox" id="art-lightbox" aria-label="画作放大预览">
+    <button class="lightbox-close" type="button" aria-label="关闭放大预览">×</button>
+    <div class="lightbox-stage">
+      <button class="lightbox-arrow prev" type="button" aria-label="上一幅作品">←</button>
+      <img id="lightbox-image" alt="">
+      <button class="lightbox-arrow next" type="button" aria-label="下一幅作品">→</button>
+    </div>
+    <p class="lightbox-meta"><span id="lightbox-counter"></span><span id="lightbox-title"></span></p>
+  </dialog>
+
+  <section class="words" id="words">
+    <div class="section-no">01 / INDEX</div>
+    <h2>WORDS</h2>
+    <ol class="post-list">
+      {{ $posts := where .Site.RegularPages "Section" "post" }}
+      {{ range $index, $post := $posts.ByDate.Reverse }}
+      <li><small>{{ printf "%02d" (add $index 1) }}</small><a href="{{ $post.RelPermalink }}">{{ $post.Title }}</a><span>{{ with $post.Params.tags }}{{ index . 0 }}{{ else }}{{ $post.Date.Format "2006.01.02" }}{{ end }}</span></li>
+      {{ end }}
+    </ol>
+  </section>
+
+  <section class="sketches" id="sketches">
+    <div class="section-no">02 / DRAWINGS</div>
+    <h2>SKETCHES</h2>
+    <a class="sketch-feature" href="{{ "gallery/" | relURL }}" aria-label="进入画作档案"><img src="{{ "images/hero-original.jpg" | relURL }}" alt="蚜英的人物铅笔草稿"></a>
+    <p>an unfinished frame / 001</p>
+    <div class="sketch-overview-head"><span>LATEST DRAWINGS</span><span id="sketch-count">-- / --</span></div>
+    <div class="sketch-overview" id="sketch-overview" aria-label="最新画作"><p>Loading drawings…</p></div>
+    <a class="sketch-more" href="{{ "gallery/" | relURL }}">MORE →</a>
+  </section>
+
+  <footer class="site-footer"><span>Ya Ying · 2026</span><span><a href="{{ "original/" | relURL }}">ORIGINAL ↗</a> / <a href="{{ "index.xml" | relURL }}">RSS</a> / <a href="mailto:{{ .Site.Params.email }}">WRITE TO ME</a></span></footer>
+</main>
 {{ end }}

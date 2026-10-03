@@ -31,7 +31,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: 0.128.0
+      HUGO_VERSION: 0.149.1
     steps:
       - name: Install Hugo CLI
         run: |
@@ -42,6 +42,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
+          fetch-depth: 0
           submodules: recursive
       - name: Setup Pages
         id: pages
@@ -56,6 +57,19 @@ jobs:
           hugo \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
+          # This commit is the last published GitHub-style layout before the redesign.
+          ORIGINAL_SOURCE_COMMIT=ff789d2ac34562dbf263c33ab853ac88e763ee88
+          ORIGINAL_SOURCE="$RUNNER_TEMP/original-site"
+          mkdir -p "$ORIGINAL_SOURCE/themes/github-style"
+          git archive "$ORIGINAL_SOURCE_COMMIT" | tar -x -C "$ORIGINAL_SOURCE"
+          cp -a themes/github-style/. "$ORIGINAL_SOURCE/themes/github-style/"
+          rm -rf "$ORIGINAL_SOURCE/content"
+          cp -a content "$ORIGINAL_SOURCE/content"
+          hugo \
+            --source "$ORIGINAL_SOURCE" \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/original/" \
+            --destination "$GITHUB_WORKSPACE/public/original"
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

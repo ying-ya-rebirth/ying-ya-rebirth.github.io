@@ -1,6 +1,7 @@
 +++
 draft = false
 title = "四千周与我，还有……"
+slug = "4000-weeks-and-i"
 date = 2026-09-24
 tags = ["生活"]
 categories = ["随笔"]

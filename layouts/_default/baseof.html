@@ -1,12 +1,17 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-{{ partial "head.html" . }}
-<body>
-  {{ partial "header" . }}
-  {{ partial "search.html" .}}
-  {{ block "content" . }}{{ end }}
-  {{ partial "footer.html" . }}
-  {{ partial "accessibility.html" . }}
+<!doctype html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f2e9">
+  <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+  <title>{{ if .IsHome }}Ya Ying{{ else }}{{ .Title }} — Ya Ying{{ end }}</title>
+  <link rel="icon" href="{{ with .Site.Params.avatar }}{{ . | relURL }}{{ else }}{{ "images/avatar.png" | relURL }}{{ end }}">
+  <link rel="alternate" type="application/rss+xml" title="Ya Ying / RSS" href="{{ "index.xml" | relURL }}">
+  <link rel="stylesheet" href="{{ "css/artist-site.css" | relURL }}">
+</head>
+<body class="{{ if .IsHome }}page-home{{ else }}page-inner{{ end }}">
+  {{ block "main" . }}{{ end }}
+  <script src="{{ "js/artist-site.js" | relURL }}" defer></script>
 </body>
-{{ partial "script.html" . }}
 </html>
