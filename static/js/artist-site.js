@@ -222,19 +222,31 @@
   const fadeSeconds = 10;
   let context;
   let gain;
+  let fadeFrame;
 
-  function syncVolume() {
-    const volume = maxVolume * Math.min(1, audio.currentTime / fadeSeconds);
+  function applyVolume() {
+    const progress = Math.min(1, Math.max(0, audio.currentTime / fadeSeconds));
+    const volume = maxVolume * progress * progress;
     if (gain) {
-      const now = context.currentTime;
-      gain.gain.cancelScheduledValues(now);
-      gain.gain.setValueAtTime(volume, now);
-      if (!audio.paused && audio.currentTime < fadeSeconds) {
-        gain.gain.linearRampToValueAtTime(maxVolume, now + fadeSeconds - audio.currentTime);
-      }
+      gain.gain.value = volume;
     } else {
       audio.volume = volume;
     }
+  }
+
+  function fadeTick() {
+    applyVolume();
+    if (!audio.paused && audio.currentTime < fadeSeconds) fadeFrame = requestAnimationFrame(fadeTick);
+  }
+
+  function stopFade() {
+    if (fadeFrame) cancelAnimationFrame(fadeFrame);
+    fadeFrame = undefined;
+  }
+
+  function startFade() {
+    stopFade();
+    fadeTick();
   }
 
   function syncButton() {
@@ -255,16 +267,16 @@
         context.createMediaElementSource(audio).connect(gain).connect(context.destination);
       }
       if (context?.state === 'suspended') await context.resume();
-      syncVolume();
+      applyVolume();
       await audio.play();
     } catch (error) {
       toggle.setAttribute('aria-label', '音频无法播放');
     }
   });
 
-  audio.addEventListener('timeupdate', () => { if (!gain) syncVolume(); });
-  audio.addEventListener('play', () => { syncVolume(); syncButton(); });
-  audio.addEventListener('pause', () => { syncVolume(); syncButton(); });
-  audio.addEventListener('ended', syncButton);
-  audio.addEventListener('seeked', syncVolume);
+  audio.addEventListener('timeupdate', applyVolume);
+  audio.addEventListener('play', () => { startFade(); syncButton(); });
+  audio.addEventListener('pause', () => { stopFade(); applyVolume(); syncButton(); });
+  audio.addEventListener('ended', () => { stopFade(); audio.currentTime = 0; applyVolume(); syncButton(); });
+  audio.addEventListener('seeked', () => { if (audio.paused) applyVolume(); else startFade(); });
 })();
