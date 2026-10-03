@@ -114,6 +114,28 @@
       if (event.target === lightbox) lightbox.close();
     });
     lightbox.addEventListener('close', () => zoomButton.focus());
+    function enableSwipe(target) {
+      let startX = null;
+      let startY = null;
+      target.addEventListener('touchstart', event => {
+        if (event.touches.length !== 1) return;
+        startX = event.touches[0].clientX;
+        startY = event.touches[0].clientY;
+      }, { passive: true });
+      target.addEventListener('touchend', event => {
+        if (startX === null || !event.changedTouches.length) return;
+        const deltaX = event.changedTouches[0].clientX - startX;
+        const deltaY = event.changedTouches[0].clientY - startY;
+        startX = null;
+        startY = null;
+        if (Math.abs(deltaX) < 45 || Math.abs(deltaX) < Math.abs(deltaY) * 1.3) return;
+        event.preventDefault();
+        show(current + (deltaX < 0 ? 1 : -1));
+      }, { passive: false });
+      target.addEventListener('touchcancel', () => { startX = null; startY = null; });
+    }
+    enableSwipe(zoomButton);
+    enableSwipe(lightbox.querySelector('.lightbox-stage'));
     document.addEventListener('keydown', event => {
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
       if (event.altKey || event.ctrlKey || event.metaKey || event.shiftKey) return;
