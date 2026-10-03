@@ -8,10 +8,12 @@
   <title>{{ if .IsHome }}Ya Ying{{ else }}{{ .Title }} — Ya Ying{{ end }}</title>
   <link rel="icon" href="{{ with .Site.Params.avatar }}{{ . | relURL }}{{ else }}{{ "images/avatar.png" | relURL }}{{ end }}">
   <link rel="alternate" type="application/rss+xml" title="Ya Ying / RSS" href="{{ "index.xml" | relURL }}">
-  <link rel="stylesheet" href="{{ "css/artist-site.css" | relURL }}">
+  {{ $style := "css/artist-site.css" }}
+  <link rel="stylesheet" href="{{ $style | relURL }}?v={{ readFile (printf "static/%s" $style) | md5 }}">
 </head>
 <body class="{{ if .IsHome }}page-home{{ else }}page-inner{{ end }}">
   {{ block "main" . }}{{ end }}
-  <script src="{{ "js/artist-site.js" | relURL }}" defer></script>
+  {{ $script := "js/artist-site.js" }}
+  <script src="{{ $script | relURL }}?v={{ readFile (printf "static/%s" $script) | md5 }}" defer></script>
 </body>
 </html>

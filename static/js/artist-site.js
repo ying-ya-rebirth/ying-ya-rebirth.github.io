@@ -218,19 +218,10 @@
 
   const audio = document.getElementById('soundtrack-audio');
   const toggle = player.querySelector('.soundtrack-toggle');
-  const icon = toggle.querySelector('span');
-  const seek = document.getElementById('soundtrack-seek');
-  const current = document.getElementById('soundtrack-current');
-  const duration = document.getElementById('soundtrack-duration');
   const maxVolume = 0.45;
   const fadeSeconds = 10;
   let context;
   let gain;
-
-  const formatTime = seconds => {
-    if (!Number.isFinite(seconds)) return '--:--';
-    return `${Math.floor(seconds / 60)}:${String(Math.floor(seconds % 60)).padStart(2, '0')}`;
-  };
 
   function syncVolume() {
     const volume = maxVolume * Math.min(1, audio.currentTime / fadeSeconds);
@@ -246,21 +237,10 @@
     }
   }
 
-  function syncProgress() {
-    current.textContent = formatTime(audio.currentTime);
-    if (Number.isFinite(audio.duration)) {
-      duration.textContent = formatTime(audio.duration);
-      seek.value = String(audio.currentTime / audio.duration * 100 || 0);
-      seek.style.setProperty('--progress', `${seek.value}%`);
-    }
-    if (!gain) syncVolume();
-  }
-
   function syncButton() {
     const playing = !audio.paused;
     toggle.setAttribute('aria-pressed', String(playing));
     toggle.setAttribute('aria-label', `${playing ? '暂停' : '播放'} Two of Me`);
-    icon.textContent = playing ? 'Ⅱ' : '▶';
   }
 
   toggle.addEventListener('click', async () => {
@@ -282,16 +262,9 @@
     }
   });
 
-  audio.addEventListener('loadedmetadata', syncProgress);
-  audio.addEventListener('durationchange', syncProgress);
-  audio.addEventListener('timeupdate', syncProgress);
+  audio.addEventListener('timeupdate', () => { if (!gain) syncVolume(); });
   audio.addEventListener('play', () => { syncVolume(); syncButton(); });
   audio.addEventListener('pause', () => { syncVolume(); syncButton(); });
   audio.addEventListener('ended', syncButton);
-  audio.addEventListener('seeked', () => { syncVolume(); syncProgress(); });
-  seek.addEventListener('input', () => {
-    if (Number.isFinite(audio.duration)) audio.currentTime = audio.duration * Number(seek.value) / 100;
-    seek.style.setProperty('--progress', `${seek.value}%`);
-  });
-  syncProgress();
+  audio.addEventListener('seeked', syncVolume);
 })();
