@@ -5,11 +5,6 @@
     <span class="folio">00</span>
     <p class="motto">To record is the last dignity.</p>
     <img class="cover-art" src="{{ "images/hero-revised.jpg" | relURL }}" alt="蚜英绘制的淡蓝粉色人物与翅膀线稿">
-    <div class="soundtrack" id="soundtrack" aria-label="首页音乐：Two of Me">
-      <button class="soundtrack-toggle" type="button" aria-label="播放 Two of Me" aria-pressed="false"></button>
-      <span class="soundtrack-credit">Made with Suno</span>
-      <audio id="soundtrack-audio" preload="metadata" src="{{ "audio/two-of-me.mp3" | relURL }}"></audio>
-    </div>
   </section>
 
   <section class="archive" id="archive" aria-label="Archive" data-gallery-owner="{{ .Site.Params.galleryRepoOwner }}" data-gallery-repo="{{ .Site.Params.galleryRepoName }}" data-gallery-branch="{{ .Site.Params.galleryRepoBranch }}" data-gallery-path="{{ .Site.Params.galleryPath }}" data-gallery-index="{{ .Site.Params.galleryIndexFile }}">
@@ -63,6 +58,11 @@
     <div class="sketch-overview-head"><span>LATEST DRAWINGS</span><span id="sketch-count">-- / --</span></div>
     <div class="sketch-overview" id="sketch-overview" aria-label="最新画作"><p>Loading drawings…</p></div>
     <a class="sketch-more" href="{{ "gallery/" | relURL }}">MORE →</a>
+    <div class="soundtrack" id="soundtrack" aria-label="首页音乐：Two of Me">
+      <button class="soundtrack-toggle" type="button" aria-label="播放 Two of Me" aria-pressed="false"></button>
+      <span class="soundtrack-credit">lyrics: YAYING · music &amp; voice: AI (Suno)</span>
+      <audio id="soundtrack-audio" preload="metadata" src="{{ "audio/two-of-me.mp3" | relURL }}"></audio>
+    </div>
   </section>
 
   <footer class="site-footer"><span>Ya Ying · 2026</span><span><a href="{{ "original/" | relURL }}">ORIGINAL ↗</a> / <a href="{{ "index.xml" | relURL }}">RSS</a> / <a href="mailto:{{ .Site.Params.email }}">WRITE TO ME</a></span></footer>
