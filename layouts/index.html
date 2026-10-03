@@ -5,6 +5,16 @@
     <span class="folio">00</span>
     <p class="motto">To record is the last dignity.</p>
     <img class="cover-art" src="{{ "images/hero-revised.jpg" | relURL }}" alt="蚜英绘制的淡蓝粉色人物与翅膀线稿">
+    <div class="soundtrack" id="soundtrack" aria-label="首页音乐：Two of Me">
+      <div class="soundtrack-head"><span>A—00 / AUDIO</span><span>TWO OF ME</span></div>
+      <div class="soundtrack-controls">
+        <button class="soundtrack-toggle" type="button" aria-label="播放 Two of Me" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        <label class="soundtrack-seek-label" for="soundtrack-seek">播放进度</label>
+        <input id="soundtrack-seek" class="soundtrack-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度">
+        <span class="soundtrack-time" aria-live="off"><span id="soundtrack-current">0:00</span> / <span id="soundtrack-duration">--:--</span></span>
+      </div>
+      <audio id="soundtrack-audio" preload="metadata" src="{{ "audio/two-of-me.mp3" | relURL }}"></audio>
+    </div>
   </section>
 
   <section class="archive" id="archive" aria-label="Archive" data-gallery-owner="{{ .Site.Params.galleryRepoOwner }}" data-gallery-repo="{{ .Site.Params.galleryRepoName }}" data-gallery-branch="{{ .Site.Params.galleryRepoBranch }}" data-gallery-path="{{ .Site.Params.galleryPath }}" data-gallery-index="{{ .Site.Params.galleryIndexFile }}">
