@@ -10,6 +10,10 @@
   <link rel="alternate" type="application/rss+xml" title="Ya Ying / RSS" href="{{ "index.xml" | relURL }}">
   {{ $style := "css/artist-site.css" }}
   <link rel="stylesheet" href="{{ $style | relURL }}?v={{ readFile (printf "static/%s" $style) | md5 }}">
+  {{ if .IsHome }}
+  <link rel="stylesheet" href="{{ "css/music-room.css" | relURL }}?v={{ readFile "static/css/music-room.css" | md5 }}">
+  <script src="{{ "js/music-room.js" | relURL }}?v={{ readFile "static/js/music-room.js" | md5 }}" defer></script>
+  {{ end }}
 </head>
 <body class="{{ if .IsHome }}page-home{{ else }}page-inner{{ end }}">
   {{ block "main" . }}{{ end }}

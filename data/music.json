@@ -1,0 +1,20 @@
+{
+  "tracks": [
+    {
+      "title": "Kids Will Be Skeletons",
+      "credit": "Mogwai · Life Is Strange Soundtrack",
+      "src": "audio/kids-will-be-skeletons.mp3",
+      "volume": 0.7
+    },
+    {
+      "title": "Kate",
+      "credit": "Jonathan Morali · Life Is Strange Soundtrack",
+      "src": "audio/kate.mp3"
+    },
+    {
+      "title": "Max & Chloe",
+      "credit": "Jonathan Morali · Life Is Strange Soundtrack",
+      "src": "audio/max-and-chloe.mp3"
+    }
+  ]
+}

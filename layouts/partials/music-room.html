@@ -1,0 +1,39 @@
+{{ with .Site.Data.music.tracks }}
+<section class="music-room" id="music-room" aria-labelledby="music-heading">
+  <canvas class="music-waves" aria-hidden="true"></canvas>
+  <div class="music-inner">
+    <div class="section-no">03 / LISTEN</div>
+    <h2 id="music-heading">SOUNDTRACKS</h2>
+    <div class="music-player">
+      <div class="music-now">
+        <span class="music-eyebrow">ON THE RECORD</span>
+        <p class="music-title">{{ (index . 0).title }}</p>
+        <p class="music-credit">{{ (index . 0).credit }}</p>
+      </div>
+      <div class="music-controls" hidden>
+        <button class="music-prev" type="button" aria-label="上一首"><span class="music-triangle" aria-hidden="true"></span></button>
+        <button class="music-toggle" type="button" aria-label="播放" aria-pressed="false"><span aria-hidden="true">▶</span></button>
+        <button class="music-next" type="button" aria-label="下一首"><span class="music-triangle" aria-hidden="true"></span></button>
+      </div>
+      <div class="music-timeline" hidden>
+        <span class="music-elapsed">0:00</span>
+        <input class="music-seek" type="range" min="0" max="100" value="0" step="0.1" aria-label="播放进度" disabled>
+        <span class="music-duration">0:00</span>
+      </div>
+      <p class="music-status" role="status" aria-live="polite"></p>
+      <ol class="music-list" aria-label="音乐列表">
+        {{ range $index, $track := . }}
+        <li>
+          <a class="music-track" href="{{ $track.src | relURL }}" data-title="{{ $track.title }}" data-credit="{{ $track.credit }}" data-volume="{{ if isset $track "volume" }}{{ $track.volume }}{{ else }}1{{ end }}" {{ if eq $index 0 }}aria-current="true"{{ end }}>
+            <span class="music-number">{{ printf "%02d" (add $index 1) }}</span>
+            <span>{{ $track.title }}</span>
+            <span class="music-track-mark" aria-hidden="true">↗</span>
+          </a>
+        </li>
+        {{ end }}
+      </ol>
+      <audio class="music-audio" preload="metadata" src="{{ (index . 0).src | relURL }}" controls></audio>
+    </div>
+  </div>
+</section>
+{{ end }}
