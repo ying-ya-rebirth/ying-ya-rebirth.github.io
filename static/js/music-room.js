@@ -56,11 +56,10 @@
     const playing = !audio.paused && !audio.ended;
     toggle.setAttribute('aria-pressed', String(playing));
     toggle.setAttribute('aria-label', `${playing ? '暂停' : '播放'} ${tracks[current].dataset.title}`);
-    toggle.firstElementChild.textContent = playing ? 'Ⅱ' : '▶';
     tracks.forEach((track, index) => {
       if (index === current) track.setAttribute('aria-current', 'true');
       else track.removeAttribute('aria-current');
-      track.querySelector('.music-track-mark').textContent = index === current && playing ? 'Ⅱ' : '▷';
+      track.classList.toggle('is-playing', index === current && playing);
     });
     wake();
   }

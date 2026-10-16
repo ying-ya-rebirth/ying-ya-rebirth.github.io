@@ -12,6 +12,11 @@
 .music-controls .music-toggle{width:54px;height:54px;border:1px solid #97948d;border-radius:50%;font-family:Arial,sans-serif;font-size:16px;transition:background .2s}
 .music-controls button:hover:not(:disabled){background:#dcd9d0}
 .music-controls button:disabled{opacity:.25;cursor:default}
+.music-icon{display:block;width:16px;height:16px;fill:currentColor}
+.music-track-mark .music-icon{width:12px;height:12px}
+.music-icon-pause{display:none}
+.music-toggle[aria-pressed="true"] .music-icon-play,.music-track.is-playing .music-icon-play{display:none}
+.music-toggle[aria-pressed="true"] .music-icon-pause,.music-track.is-playing .music-icon-pause{display:block}
 .music-triangle{display:block;width:0;height:0;border-top:5px solid transparent;border-bottom:5px solid transparent;border-left:7px solid currentColor;opacity:.8}
 .music-prev .music-triangle{transform:rotate(180deg)}
 .music-timeline{grid-column:1/-1;display:flex;align-items:center;gap:14px;font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums}
